@@ -16,14 +16,16 @@ claim-boundary scaffold through the frozen Paper 13 result:
 is closed as a finite target, comparator, and regime descriptor rung. `DBM-004`
 is closed as a finite outcome, uncertainty, and audit-status descriptor rung.
 `DBM-005` is closed as a reference-only Paper 13 evidence-intake compatibility
-rung. The local Paper 14 discriminating benchmarks theorem is not closed.
+rung. `DBM-006` is closed as a benchmark stability and coarse-graining rung.
+The local Paper 14 discriminating benchmarks theorem is not closed.
 
 ## Active Obligation
 
-`DBM-006`: Define benchmark stability and coarse-graining behavior.
+`DBM-007`: Audit for hidden promotion, validation, prediction, or
+falsification imports.
 
-The stability map must remain finite, benchmark-local, auditable, and
-non-promoting. It must not
+The audit must remain finite, explicit, fail-closed, and non-promoting. It must
+not
 import continuum quantum field theory, external Hilbert bundles, matter fields,
 gauge fields, physical particle excitations, physical Standard Model content,
 physical validation, empirical adequacy, observed-catalog recovery, prediction
@@ -38,6 +40,7 @@ calibration, physical nature realization, or a unified field theory.
 - `DBM-004`: Finite benchmark outcome, uncertainty, and audit-status
   descriptors.
 - `DBM-005`: Paper 13 evidence-intake compatibility without validation.
+- `DBM-006`: Benchmark stability and coarse-graining behavior.
 
 ## Claim Boundary
 

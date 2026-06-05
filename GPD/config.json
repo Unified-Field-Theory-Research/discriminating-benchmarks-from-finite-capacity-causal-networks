@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "discriminating-benchmarks-from-finite-capacity-causal-networks",
   "paper_number": 14,
-  "active_obligation": "DBM-006",
+  "active_obligation": "DBM-007",
   "theorem_prefix": "DBM",
   "non_promotion_boundary_required": true,
   "rust_guard_crate": "cclab_accel",

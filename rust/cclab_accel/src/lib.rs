@@ -654,6 +654,93 @@ impl DBM005Paper13IntakeCompatibility {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum StabilityDescriptorKind {
+    RecordSchemaInvariant,
+    ComparatorLabelInvariant,
+    AuditBoundaryInvariant,
+}
+
+impl StabilityDescriptorKind {
+    pub const ALL: [Self; 3] = [
+        Self::RecordSchemaInvariant,
+        Self::ComparatorLabelInvariant,
+        Self::AuditBoundaryInvariant,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CoarseGrainingDescriptorKind {
+    FiniteAggregationMap,
+    BoundedResolutionChange,
+    AuditPreservingProjection,
+}
+
+impl CoarseGrainingDescriptorKind {
+    pub const ALL: [Self; 3] = [
+        Self::FiniteAggregationMap,
+        Self::BoundedResolutionChange,
+        Self::AuditPreservingProjection,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct DBM006StabilityCoarseGraining {
+    pub paper13_compatibility: DBM005Paper13IntakeCompatibility,
+    pub stability_descriptor: StabilityDescriptorKind,
+    pub coarse_graining_descriptor: CoarseGrainingDescriptorKind,
+    pub finite_stability_map: bool,
+    pub finite_coarse_graining_map: bool,
+    pub benchmark_local_stability: bool,
+    pub coarse_graining_preserves_audit_boundary: bool,
+    pub stability_does_not_assert_validation: bool,
+    pub coarse_graining_does_not_assert_physical_promotion: bool,
+    pub no_prediction_success_imported: bool,
+    pub no_falsification_closure_imported: bool,
+    pub no_empirical_adequacy_imported: bool,
+    pub claim_boundary: Paper14ClaimBoundary,
+}
+
+impl DBM006StabilityCoarseGraining {
+    pub const fn canonical() -> Self {
+        Self {
+            paper13_compatibility: DBM005Paper13IntakeCompatibility::canonical(),
+            stability_descriptor: StabilityDescriptorKind::RecordSchemaInvariant,
+            coarse_graining_descriptor: CoarseGrainingDescriptorKind::AuditPreservingProjection,
+            finite_stability_map: true,
+            finite_coarse_graining_map: true,
+            benchmark_local_stability: true,
+            coarse_graining_preserves_audit_boundary: true,
+            stability_does_not_assert_validation: true,
+            coarse_graining_does_not_assert_physical_promotion: true,
+            no_prediction_success_imported: true,
+            no_falsification_closure_imported: true,
+            no_empirical_adequacy_imported: true,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_dbm006(&self) -> bool {
+        self.paper13_compatibility.closes_dbm005()
+            && !StabilityDescriptorKind::ALL.is_empty()
+            && !CoarseGrainingDescriptorKind::ALL.is_empty()
+            && StabilityDescriptorKind::ALL.contains(&self.stability_descriptor)
+            && CoarseGrainingDescriptorKind::ALL.contains(&self.coarse_graining_descriptor)
+            && self.finite_stability_map
+            && self.finite_coarse_graining_map
+            && self.benchmark_local_stability
+            && self.coarse_graining_preserves_audit_boundary
+            && self.stability_does_not_assert_validation
+            && self.coarse_graining_does_not_assert_physical_promotion
+            && self.no_prediction_success_imported
+            && self.no_falsification_closure_imported
+            && self.no_empirical_adequacy_imported
+            && self
+                .claim_boundary
+                .all_physical_and_benchmark_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper14SkeletonCertificate {
     pub dbm001_upstream_binding_closed: bool,
     pub dbm002_finite_benchmark_record_closed: bool,
@@ -737,6 +824,20 @@ impl Paper14SkeletonCertificate {
         }
     }
 
+    pub const fn through_dbm006() -> Self {
+        Self {
+            dbm001_upstream_binding_closed: true,
+            dbm002_finite_benchmark_record_closed: true,
+            dbm003_target_comparator_regime_closed: true,
+            dbm004_outcome_uncertainty_audit_closed: true,
+            dbm005_paper13_intake_compatibility_closed: true,
+            dbm006_stability_coarse_graining_closed: true,
+            dbm007_no_hidden_promotion_validation_prediction_audit_closed: false,
+            dbm008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper14_theorem(&self) -> bool {
         self.dbm001_upstream_binding_closed
             && self.dbm002_finite_benchmark_record_closed
@@ -761,5 +862,5 @@ pub fn is_sha1_hex(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "DBM-006"
+    "DBM-007"
 }

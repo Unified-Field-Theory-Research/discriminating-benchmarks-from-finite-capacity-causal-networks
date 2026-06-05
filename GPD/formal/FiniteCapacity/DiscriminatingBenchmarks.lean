@@ -590,6 +590,112 @@ theorem dbm005_canonical_paper13_intake_compatibility_closed :
   simp
 
 /--
+`DBM-006` defines benchmark stability and coarse-graining behavior as finite,
+benchmark-local maps. Stability does not become validation, and coarse graining
+does not become physical promotion.
+-/
+structure DBM006StabilityCoarseGrainingContract where
+  dbm005Paper13IntakeCompatibilityClosed : Prop
+  finiteStabilityMap : Prop
+  finiteCoarseGrainingMap : Prop
+  benchmarkLocalStability : Prop
+  coarseGrainingPreservesAuditBoundary : Prop
+  stabilityDoesNotAssertValidation : Prop
+  coarseGrainingDoesNotAssertPhysicalPromotion : Prop
+  noPredictionSuccessImported : Prop
+  noFalsificationClosureImported : Prop
+  noEmpiricalAdequacyImported : Prop
+  noBenchmarkRecoveryClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def DBM006StabilityCoarseGrainingContract.closed
+    (c : DBM006StabilityCoarseGrainingContract) : Prop :=
+  c.dbm005Paper13IntakeCompatibilityClosed ∧
+  c.finiteStabilityMap ∧
+  c.finiteCoarseGrainingMap ∧
+  c.benchmarkLocalStability ∧
+  c.coarseGrainingPreservesAuditBoundary ∧
+  c.stabilityDoesNotAssertValidation ∧
+  c.coarseGrainingDoesNotAssertPhysicalPromotion ∧
+  c.noPredictionSuccessImported ∧
+  c.noFalsificationClosureImported ∧
+  c.noEmpiricalAdequacyImported ∧
+  c.noBenchmarkRecoveryClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+theorem dbm006_stability_coarse_graining_closed_from_fields
+    (c : DBM006StabilityCoarseGrainingContract)
+    (hDBM005 : c.dbm005Paper13IntakeCompatibilityClosed)
+    (hStabilityMap : c.finiteStabilityMap)
+    (hCoarseMap : c.finiteCoarseGrainingMap)
+    (hLocal : c.benchmarkLocalStability)
+    (hAuditBoundary : c.coarseGrainingPreservesAuditBoundary)
+    (hNoValidationFromStability : c.stabilityDoesNotAssertValidation)
+    (hNoPromotionFromCoarse : c.coarseGrainingDoesNotAssertPhysicalPromotion)
+    (hNoPredictionImport : c.noPredictionSuccessImported)
+    (hNoFalsificationImport : c.noFalsificationClosureImported)
+    (hNoEmpiricalImport : c.noEmpiricalAdequacyImported)
+    (hNoBenchmarkRecovery : c.noBenchmarkRecoveryClaim)
+    (hNoPrediction : c.noPredictionSuccessClaim)
+    (hNoFalsification : c.noFalsificationSuccessClaim)
+    (hNoPromotion : c.noPhysicalPromotionClaim)
+    (hNoValidation : c.noPhysicalValidationClaim)
+    (hNoEmpirical : c.noEmpiricalAdequacyClaim)
+    (hNoNature : c.noPhysicalNatureClaim)
+    (hNoUFT : c.noUnifiedFieldTheoryClaim) :
+    DBM006StabilityCoarseGrainingContract.closed c := by
+  unfold DBM006StabilityCoarseGrainingContract.closed
+  exact ⟨hDBM005, hStabilityMap, hCoarseMap, hLocal, hAuditBoundary,
+    hNoValidationFromStability, hNoPromotionFromCoarse, hNoPredictionImport,
+    hNoFalsificationImport, hNoEmpiricalImport, hNoBenchmarkRecovery,
+    hNoPrediction, hNoFalsification, hNoPromotion, hNoValidation,
+    hNoEmpirical, hNoNature, hNoUFT⟩
+
+def dbm006CanonicalStabilityCoarseGrainingContract :
+    DBM006StabilityCoarseGrainingContract :=
+  {
+    dbm005Paper13IntakeCompatibilityClosed :=
+      DBM005Paper13IntakeCompatibilityContract.closed
+        dbm005CanonicalPaper13IntakeCompatibilityContract,
+    finiteStabilityMap := True,
+    finiteCoarseGrainingMap := True,
+    benchmarkLocalStability := True,
+    coarseGrainingPreservesAuditBoundary := True,
+    stabilityDoesNotAssertValidation := True,
+    coarseGrainingDoesNotAssertPhysicalPromotion := True,
+    noPredictionSuccessImported := True,
+    noFalsificationClosureImported := True,
+    noEmpiricalAdequacyImported := True,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem dbm006_canonical_stability_coarse_graining_closed :
+    DBM006StabilityCoarseGrainingContract.closed
+      dbm006CanonicalStabilityCoarseGrainingContract := by
+  unfold DBM006StabilityCoarseGrainingContract.closed
+  unfold dbm006CanonicalStabilityCoarseGrainingContract
+  simp
+
+/--
 The full Paper 14 theorem stays closed only after a future final conditional
 certificate. `DBM-001` intentionally leaves that field false.
 -/
@@ -765,6 +871,39 @@ def paper14DBM005SkeletonContract :
     noUnifiedFieldTheoryClaim := True
   }
 
+def paper14DBM006SkeletonContract :
+    Paper14DiscriminatingBenchmarksTheoremContract :=
+  {
+    dbm001UpstreamBindingClosed :=
+      DBM001UpstreamBindingContract.closed
+        dbm001CanonicalUpstreamBindingContract,
+    dbm002FiniteBenchmarkRecordClosed :=
+      DBM002FiniteBenchmarkRecordContract.closed
+        dbm002CanonicalFiniteBenchmarkRecordContract,
+    dbm003TargetComparatorRegimeClosed :=
+      DBM003TargetComparatorRegimeDescriptorContract.closed
+        dbm003CanonicalTargetComparatorRegimeDescriptorContract,
+    dbm004OutcomeUncertaintyAuditClosed :=
+      DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+        dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract,
+    dbm005Paper13IntakeCompatibilityClosed :=
+      DBM005Paper13IntakeCompatibilityContract.closed
+        dbm005CanonicalPaper13IntakeCompatibilityContract,
+    dbm006StabilityCoarseGrainingClosed :=
+      DBM006StabilityCoarseGrainingContract.closed
+        dbm006CanonicalStabilityCoarseGrainingContract,
+    dbm007NoHiddenPromotionValidationPredictionAuditClosed := False,
+    dbm008FinalConditionalCertificateClosed := False,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
 theorem paper14_dbm001_skeleton_does_not_close_discriminating_benchmarks_theorem :
     ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
       paper14InitialDBM001SkeletonContract := by
@@ -798,6 +937,13 @@ theorem paper14_dbm005_skeleton_does_not_close_discriminating_benchmarks_theorem
       paper14DBM005SkeletonContract := by
   unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
   unfold paper14DBM005SkeletonContract
+  simp
+
+theorem paper14_dbm006_skeleton_does_not_close_discriminating_benchmarks_theorem :
+    ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
+      paper14DBM006SkeletonContract := by
+  unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
+  unfold paper14DBM006SkeletonContract
   simp
 
 end FiniteCapacity

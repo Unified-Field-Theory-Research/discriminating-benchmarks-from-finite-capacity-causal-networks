@@ -10,17 +10,15 @@
 - `DBM-004`: Finite benchmark outcome, uncertainty, and audit-status
   descriptors.
 - `DBM-005`: Paper 13 evidence-intake compatibility without validation.
+- `DBM-006`: Benchmark stability and coarse-graining behavior.
 
 ## Active
 
-- `DBM-006`: Define benchmark stability and coarse-graining behavior without
-  importing validation, empirical adequacy, prediction success, falsification
-  closure, physical promotion, or observed-catalog recovery.
+- `DBM-007`: Audit for hidden physical-promotion, validation, prediction, or
+  falsification imports.
 
 ## Planned
 
-- `DBM-007`: Audit for hidden physical-promotion, validation, prediction, or
-  falsification imports.
 - `DBM-008`: Assemble the final conditional discriminating benchmarks
   certificate.
 

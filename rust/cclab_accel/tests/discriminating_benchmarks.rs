@@ -4,8 +4,8 @@ use std::path::{Path, PathBuf};
 use cclab_accel::{
     active_obligation, paper14_skeleton_marker, DBM001UpstreamBinding, DBM002FiniteBenchmarkRecord,
     DBM003TargetComparatorRegimeDescriptors, DBM004OutcomeUncertaintyAuditDescriptors,
-    DBM005Paper13IntakeCompatibility, Paper14SkeletonCertificate, PAPER13_FINAL_CERTIFICATE,
-    PAPER13_FORMAL_ENDPOINT, PAPER13_FROZEN_COMMIT,
+    DBM005Paper13IntakeCompatibility, DBM006StabilityCoarseGraining, Paper14SkeletonCertificate,
+    PAPER13_FINAL_CERTIFICATE, PAPER13_FORMAL_ENDPOINT, PAPER13_FROZEN_COMMIT,
 };
 
 fn repo_root() -> PathBuf {
@@ -184,6 +184,36 @@ fn dbm005_skeleton_still_keeps_paper14_theorem_open() {
 }
 
 #[test]
+fn dbm006_defines_stability_and_coarse_graining_without_promotion() {
+    let stability = DBM006StabilityCoarseGraining::canonical();
+    assert!(stability.closes_dbm006());
+    assert!(stability.paper13_compatibility.closes_dbm005());
+    assert!(stability.finite_stability_map);
+    assert!(stability.finite_coarse_graining_map);
+    assert!(stability.benchmark_local_stability);
+    assert!(stability.coarse_graining_preserves_audit_boundary);
+    assert!(stability.stability_does_not_assert_validation);
+    assert!(stability.coarse_graining_does_not_assert_physical_promotion);
+    assert!(stability.no_prediction_success_imported);
+    assert!(stability.no_falsification_closure_imported);
+    assert!(stability.no_empirical_adequacy_imported);
+}
+
+#[test]
+fn dbm006_skeleton_still_keeps_paper14_theorem_open() {
+    let skeleton = Paper14SkeletonCertificate::through_dbm006();
+    assert!(skeleton.dbm001_upstream_binding_closed);
+    assert!(skeleton.dbm002_finite_benchmark_record_closed);
+    assert!(skeleton.dbm003_target_comparator_regime_closed);
+    assert!(skeleton.dbm004_outcome_uncertainty_audit_closed);
+    assert!(skeleton.dbm005_paper13_intake_compatibility_closed);
+    assert!(skeleton.dbm006_stability_coarse_graining_closed);
+    assert!(!skeleton.dbm007_no_hidden_promotion_validation_prediction_audit_closed);
+    assert!(!skeleton.dbm008_final_conditional_certificate_closed);
+    assert!(!skeleton.closes_paper14_theorem());
+}
+
+#[test]
 fn upstream_json_records_paper13_certificate_and_nonpromotion() {
     let upstream = read_repo_file("UPSTREAM-PAPERS.json");
     assert!(upstream.contains(PAPER13_FROZEN_COMMIT));
@@ -197,7 +227,7 @@ fn upstream_json_records_paper13_certificate_and_nonpromotion() {
 }
 
 #[test]
-fn docs_keep_dbm006_active_and_physical_claims_false() {
+fn docs_keep_dbm007_active_and_physical_claims_false() {
     let state = read_repo_file("GPD/state.json");
     let config = read_repo_file("GPD/config.json");
     let paper_config = read_repo_file(
@@ -206,14 +236,15 @@ fn docs_keep_dbm006_active_and_physical_claims_false() {
     let state_md = read_repo_file("GPD/STATE.md");
     let theorem = read_repo_file("docs/discriminating_benchmarks_theorem.md");
 
-    assert_eq!(active_obligation(), "DBM-006");
-    assert!(state.contains("\"active_obligation\": \"DBM-006\""));
-    assert!(config.contains("\"active_obligation\": \"DBM-006\""));
-    assert!(paper_config.contains("\"active_obligation\": \"DBM-006\""));
+    assert_eq!(active_obligation(), "DBM-007");
+    assert!(state.contains("\"active_obligation\": \"DBM-007\""));
+    assert!(config.contains("\"active_obligation\": \"DBM-007\""));
+    assert!(paper_config.contains("\"active_obligation\": \"DBM-007\""));
     assert!(state.contains("\"dbm002_finite_benchmark_record_closed\": true"));
     assert!(state.contains("\"dbm003_target_comparator_regime_closed\": true"));
     assert!(state.contains("\"dbm004_outcome_uncertainty_audit_closed\": true"));
     assert!(state.contains("\"dbm005_paper13_intake_compatibility_closed\": true"));
+    assert!(state.contains("\"dbm006_stability_coarse_graining_closed\": true"));
     assert!(state.contains("\"discriminating_benchmarks_theorem_closed\": false"));
     assert!(state.contains("\"benchmark_recovery_claim\": false"));
     assert!(state.contains("\"prediction_success_claim\": false"));
@@ -222,7 +253,7 @@ fn docs_keep_dbm006_active_and_physical_claims_false() {
     assert!(state.contains("\"physical_validation_claim\": false"));
     assert!(state.contains("\"empirical_adequacy_claim\": false"));
     assert!(state_md.contains("discriminating benchmarks theorem is not closed."));
-    assert!(theorem.contains("DBM-006"));
+    assert!(theorem.contains("DBM-007"));
     assert!(theorem.contains("no unified field theory claim"));
 }
 

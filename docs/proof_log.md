@@ -29,3 +29,8 @@
   blockers, and a Lean contract proving the DBM-005 rung while keeping the full
   Paper 14 theorem open.
 - Recorded `DBM-006` as the active next obligation.
+- Closed `DBM-006` with finite stability and coarse-graining descriptor maps,
+  benchmark-local stability, audit-boundary preservation, validation/promotion
+  blockers, and a Lean contract proving the DBM-006 rung while keeping the full
+  Paper 14 theorem open.
+- Recorded `DBM-007` as the active next obligation.

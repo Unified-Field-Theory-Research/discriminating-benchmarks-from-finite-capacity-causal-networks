@@ -27,18 +27,22 @@ falsification success, or unified-field promotion.
 - `DBM-005`: Paper 13 evidence-intake compatibility as a finite,
   reference-only map that imports no validation readout closure, empirical
   adequacy, prediction success, falsification closure, or physical promotion.
+- `DBM-006`: Benchmark stability and coarse-graining behavior as finite,
+  benchmark-local maps that preserve audit boundaries without asserting
+  validation or physical promotion.
 
 ## Active Rung
 
-- `DBM-006`: Benchmark stability and coarse-graining behavior.
+- `DBM-007`: No-hidden-promotion, validation, prediction, or falsification
+  import audit.
 
-Required boundary for `DBM-006`:
+Required boundary for `DBM-007`:
 
-- finite stability descriptors
-- finite coarse-graining descriptors
-- benchmark-local stability map
-- no validation by stability
-- no promotion by coarse graining
+- finite audit rows
+- explicit hidden-import blockers
+- fail-closed promotion gate
+- fail-closed validation gate
+- fail-closed prediction and falsification gates
 - no benchmark recovery claim
 - no prediction success claim
 - no falsification success claim
@@ -51,8 +55,6 @@ Required boundary for `DBM-006`:
 
 ## Planned Rungs
 
-- `DBM-007`: no-hidden-promotion, validation, prediction, or falsification
-  import audit
 - `DBM-008`: final conditional certificate
 
 ## Residual Risk
