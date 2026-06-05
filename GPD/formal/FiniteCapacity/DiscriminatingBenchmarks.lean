@@ -479,6 +479,117 @@ theorem dbm004_canonical_outcome_uncertainty_audit_closed :
   simp
 
 /--
+`DBM-005` defines compatibility with the closed Paper 13 evidence-intake
+certificate as a finite reference-only map. It does not import validation
+readout closure, empirical adequacy, prediction success, falsification closure,
+or physical promotion.
+-/
+structure DBM005Paper13IntakeCompatibilityContract where
+  dbm004OutcomeUncertaintyAuditClosed : Prop
+  finitePaper13CompatibilityMap : Prop
+  paper13FrozenCommitReferenced : Prop
+  paper13FormalEndpointReferencedOnly : Prop
+  paper13FinalCertificateReferencedOnly : Prop
+  noValidationReadoutClosureImported : Prop
+  noEvidenceIntakePromotionImported : Prop
+  noEmpiricalAdequacyImported : Prop
+  noObservedCatalogRecoveryImported : Prop
+  noPredictionSuccessImported : Prop
+  noFalsificationClosureImported : Prop
+  noBenchmarkRecoveryClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def DBM005Paper13IntakeCompatibilityContract.closed
+    (c : DBM005Paper13IntakeCompatibilityContract) : Prop :=
+  c.dbm004OutcomeUncertaintyAuditClosed ∧
+  c.finitePaper13CompatibilityMap ∧
+  c.paper13FrozenCommitReferenced ∧
+  c.paper13FormalEndpointReferencedOnly ∧
+  c.paper13FinalCertificateReferencedOnly ∧
+  c.noValidationReadoutClosureImported ∧
+  c.noEvidenceIntakePromotionImported ∧
+  c.noEmpiricalAdequacyImported ∧
+  c.noObservedCatalogRecoveryImported ∧
+  c.noPredictionSuccessImported ∧
+  c.noFalsificationClosureImported ∧
+  c.noBenchmarkRecoveryClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+theorem dbm005_paper13_intake_compatibility_closed_from_fields
+    (c : DBM005Paper13IntakeCompatibilityContract)
+    (hDBM004 : c.dbm004OutcomeUncertaintyAuditClosed)
+    (hFiniteMap : c.finitePaper13CompatibilityMap)
+    (hCommit : c.paper13FrozenCommitReferenced)
+    (hEndpoint : c.paper13FormalEndpointReferencedOnly)
+    (hCertificate : c.paper13FinalCertificateReferencedOnly)
+    (hNoValidationImport : c.noValidationReadoutClosureImported)
+    (hNoEvidencePromotion : c.noEvidenceIntakePromotionImported)
+    (hNoEmpiricalImport : c.noEmpiricalAdequacyImported)
+    (hNoObservedImport : c.noObservedCatalogRecoveryImported)
+    (hNoPredictionImport : c.noPredictionSuccessImported)
+    (hNoFalsificationImport : c.noFalsificationClosureImported)
+    (hNoBenchmarkRecovery : c.noBenchmarkRecoveryClaim)
+    (hNoPrediction : c.noPredictionSuccessClaim)
+    (hNoFalsification : c.noFalsificationSuccessClaim)
+    (hNoPromotion : c.noPhysicalPromotionClaim)
+    (hNoValidation : c.noPhysicalValidationClaim)
+    (hNoEmpirical : c.noEmpiricalAdequacyClaim)
+    (hNoNature : c.noPhysicalNatureClaim)
+    (hNoUFT : c.noUnifiedFieldTheoryClaim) :
+    DBM005Paper13IntakeCompatibilityContract.closed c := by
+  unfold DBM005Paper13IntakeCompatibilityContract.closed
+  exact ⟨hDBM004, hFiniteMap, hCommit, hEndpoint, hCertificate,
+    hNoValidationImport, hNoEvidencePromotion, hNoEmpiricalImport,
+    hNoObservedImport, hNoPredictionImport, hNoFalsificationImport,
+    hNoBenchmarkRecovery, hNoPrediction, hNoFalsification, hNoPromotion,
+    hNoValidation, hNoEmpirical, hNoNature, hNoUFT⟩
+
+def dbm005CanonicalPaper13IntakeCompatibilityContract :
+    DBM005Paper13IntakeCompatibilityContract :=
+  {
+    dbm004OutcomeUncertaintyAuditClosed :=
+      DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+        dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract,
+    finitePaper13CompatibilityMap := True,
+    paper13FrozenCommitReferenced := True,
+    paper13FormalEndpointReferencedOnly := True,
+    paper13FinalCertificateReferencedOnly := True,
+    noValidationReadoutClosureImported := True,
+    noEvidenceIntakePromotionImported := True,
+    noEmpiricalAdequacyImported := True,
+    noObservedCatalogRecoveryImported := True,
+    noPredictionSuccessImported := True,
+    noFalsificationClosureImported := True,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem dbm005_canonical_paper13_intake_compatibility_closed :
+    DBM005Paper13IntakeCompatibilityContract.closed
+      dbm005CanonicalPaper13IntakeCompatibilityContract := by
+  unfold DBM005Paper13IntakeCompatibilityContract.closed
+  unfold dbm005CanonicalPaper13IntakeCompatibilityContract
+  simp
+
+/--
 The full Paper 14 theorem stays closed only after a future final conditional
 certificate. `DBM-001` intentionally leaves that field false.
 -/
@@ -623,6 +734,37 @@ def paper14DBM004SkeletonContract :
     noUnifiedFieldTheoryClaim := True
   }
 
+def paper14DBM005SkeletonContract :
+    Paper14DiscriminatingBenchmarksTheoremContract :=
+  {
+    dbm001UpstreamBindingClosed :=
+      DBM001UpstreamBindingContract.closed
+        dbm001CanonicalUpstreamBindingContract,
+    dbm002FiniteBenchmarkRecordClosed :=
+      DBM002FiniteBenchmarkRecordContract.closed
+        dbm002CanonicalFiniteBenchmarkRecordContract,
+    dbm003TargetComparatorRegimeClosed :=
+      DBM003TargetComparatorRegimeDescriptorContract.closed
+        dbm003CanonicalTargetComparatorRegimeDescriptorContract,
+    dbm004OutcomeUncertaintyAuditClosed :=
+      DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+        dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract,
+    dbm005Paper13IntakeCompatibilityClosed :=
+      DBM005Paper13IntakeCompatibilityContract.closed
+        dbm005CanonicalPaper13IntakeCompatibilityContract,
+    dbm006StabilityCoarseGrainingClosed := False,
+    dbm007NoHiddenPromotionValidationPredictionAuditClosed := False,
+    dbm008FinalConditionalCertificateClosed := False,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
 theorem paper14_dbm001_skeleton_does_not_close_discriminating_benchmarks_theorem :
     ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
       paper14InitialDBM001SkeletonContract := by
@@ -649,6 +791,13 @@ theorem paper14_dbm004_skeleton_does_not_close_discriminating_benchmarks_theorem
       paper14DBM004SkeletonContract := by
   unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
   unfold paper14DBM004SkeletonContract
+  simp
+
+theorem paper14_dbm005_skeleton_does_not_close_discriminating_benchmarks_theorem :
+    ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
+      paper14DBM005SkeletonContract := by
+  unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
+  unfold paper14DBM005SkeletonContract
   simp
 
 end FiniteCapacity

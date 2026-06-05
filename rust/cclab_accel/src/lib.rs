@@ -576,6 +576,84 @@ impl DBM004OutcomeUncertaintyAuditDescriptors {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Paper13CompatibilityDescriptor {
+    FrozenCommitReference,
+    FormalEndpointReference,
+    FinalCertificateReference,
+}
+
+impl Paper13CompatibilityDescriptor {
+    pub const ALL: [Self; 3] = [
+        Self::FrozenCommitReference,
+        Self::FormalEndpointReference,
+        Self::FinalCertificateReference,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct DBM005Paper13IntakeCompatibility {
+    pub outcome_set: DBM004OutcomeUncertaintyAuditDescriptors,
+    pub paper13_frozen_commit: &'static str,
+    pub paper13_formal_endpoint: &'static str,
+    pub paper13_final_certificate: &'static str,
+    pub compatibility_descriptor: Paper13CompatibilityDescriptor,
+    pub finite_compatibility_map: bool,
+    pub final_certificate_referenced_only: bool,
+    pub formal_endpoint_referenced_only: bool,
+    pub no_validation_readout_closure_imported: bool,
+    pub no_evidence_intake_promotion_imported: bool,
+    pub no_empirical_adequacy_imported: bool,
+    pub no_observed_catalog_recovery_imported: bool,
+    pub no_prediction_success_imported: bool,
+    pub no_falsification_closure_imported: bool,
+    pub claim_boundary: Paper14ClaimBoundary,
+}
+
+impl DBM005Paper13IntakeCompatibility {
+    pub const fn canonical() -> Self {
+        Self {
+            outcome_set: DBM004OutcomeUncertaintyAuditDescriptors::canonical(),
+            paper13_frozen_commit: PAPER13_FROZEN_COMMIT,
+            paper13_formal_endpoint: PAPER13_FORMAL_ENDPOINT,
+            paper13_final_certificate: PAPER13_FINAL_CERTIFICATE,
+            compatibility_descriptor: Paper13CompatibilityDescriptor::FinalCertificateReference,
+            finite_compatibility_map: true,
+            final_certificate_referenced_only: true,
+            formal_endpoint_referenced_only: true,
+            no_validation_readout_closure_imported: true,
+            no_evidence_intake_promotion_imported: true,
+            no_empirical_adequacy_imported: true,
+            no_observed_catalog_recovery_imported: true,
+            no_prediction_success_imported: true,
+            no_falsification_closure_imported: true,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_dbm005(&self) -> bool {
+        self.outcome_set.closes_dbm004()
+            && is_sha1_hex(self.paper13_frozen_commit)
+            && self.paper13_frozen_commit == PAPER13_FROZEN_COMMIT
+            && self.paper13_formal_endpoint == PAPER13_FORMAL_ENDPOINT
+            && self.paper13_final_certificate == PAPER13_FINAL_CERTIFICATE
+            && !Paper13CompatibilityDescriptor::ALL.is_empty()
+            && Paper13CompatibilityDescriptor::ALL.contains(&self.compatibility_descriptor)
+            && self.finite_compatibility_map
+            && self.final_certificate_referenced_only
+            && self.formal_endpoint_referenced_only
+            && self.no_validation_readout_closure_imported
+            && self.no_evidence_intake_promotion_imported
+            && self.no_empirical_adequacy_imported
+            && self.no_observed_catalog_recovery_imported
+            && self.no_prediction_success_imported
+            && self.no_falsification_closure_imported
+            && self
+                .claim_boundary
+                .all_physical_and_benchmark_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper14SkeletonCertificate {
     pub dbm001_upstream_binding_closed: bool,
     pub dbm002_finite_benchmark_record_closed: bool,
@@ -645,6 +723,20 @@ impl Paper14SkeletonCertificate {
         }
     }
 
+    pub const fn through_dbm005() -> Self {
+        Self {
+            dbm001_upstream_binding_closed: true,
+            dbm002_finite_benchmark_record_closed: true,
+            dbm003_target_comparator_regime_closed: true,
+            dbm004_outcome_uncertainty_audit_closed: true,
+            dbm005_paper13_intake_compatibility_closed: true,
+            dbm006_stability_coarse_graining_closed: false,
+            dbm007_no_hidden_promotion_validation_prediction_audit_closed: false,
+            dbm008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper14_theorem(&self) -> bool {
         self.dbm001_upstream_binding_closed
             && self.dbm002_finite_benchmark_record_closed
@@ -669,5 +761,5 @@ pub fn is_sha1_hex(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "DBM-005"
+    "DBM-006"
 }

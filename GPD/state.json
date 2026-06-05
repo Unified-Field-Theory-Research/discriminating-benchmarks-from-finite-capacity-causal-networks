@@ -1,14 +1,15 @@
 {
   "schema_version": 1,
   "paper": 14,
-  "phase": 4,
-  "phase_name": "Finite Outcome Uncertainty Audit Descriptors",
-  "active_obligation": "DBM-005",
+  "phase": 5,
+  "phase_name": "Paper 13 Compatibility Without Validation",
+  "active_obligation": "DBM-006",
   "closed_obligations": [
     "DBM-001",
     "DBM-002",
     "DBM-003",
-    "DBM-004"
+    "DBM-004",
+    "DBM-005"
   ],
   "upstream_frozen_through_paper13": true,
   "paper13_frozen_commit": "e3c2aaf67fc546c636d7901679ff0c3a4dc5a4ee",
@@ -19,6 +20,7 @@
     "dbm002_finite_benchmark_record_closed": true,
     "dbm003_target_comparator_regime_closed": true,
     "dbm004_outcome_uncertainty_audit_closed": true,
+    "dbm005_paper13_intake_compatibility_closed": true,
     "discriminating_benchmarks_theorem_closed": false,
     "benchmark_recovery_claim": false,
     "prediction_success_claim": false,
@@ -38,5 +40,5 @@
     "physical_nature_claim": false,
     "unified_field_theory_claim": false
   },
-  "next_move": "DBM-005: define Paper 13 evidence-intake compatibility without validation."
+  "next_move": "DBM-006: define benchmark stability and coarse-graining behavior."
 }

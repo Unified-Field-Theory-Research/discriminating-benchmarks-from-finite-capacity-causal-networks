@@ -24,3 +24,8 @@
   guards, and a Lean contract proving the DBM-004 rung while keeping the full
   Paper 14 theorem open.
 - Recorded `DBM-005` as the active next obligation.
+- Closed `DBM-005` with a finite Paper 13 compatibility descriptor, frozen
+  commit/formal endpoint/final certificate references, validation-import
+  blockers, and a Lean contract proving the DBM-005 rung while keeping the full
+  Paper 14 theorem open.
+- Recorded `DBM-006` as the active next obligation.
