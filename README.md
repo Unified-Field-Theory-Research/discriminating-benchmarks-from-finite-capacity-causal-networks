@@ -39,8 +39,9 @@ This repo is intentionally separate from the upstream theorem repositories:
 The current theorem package is open and non-promoting. `DBM-001` records the
 upstream binding and claim boundary through the closed Paper 13 result.
 `DBM-002` defines finite discriminating benchmark records as bounded,
-auditable, non-promoting interface rows. `DBM-003` is the active next
-obligation: define finite benchmark target, comparator, and regime
+auditable, non-promoting interface rows. `DBM-003` defines finite benchmark
+target, comparator, and regime descriptors. `DBM-004` is the active next
+obligation: define finite benchmark outcome, uncertainty, and audit-status
 descriptors.
 
 This does not prove benchmark recovery, prediction success, falsification

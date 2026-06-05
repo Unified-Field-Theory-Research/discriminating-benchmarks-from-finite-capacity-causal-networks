@@ -14,3 +14,8 @@
   contract proving the DBM-002 rung while keeping the full Paper 14 theorem
   open.
 - Recorded `DBM-003` as the active next obligation.
+- Closed `DBM-003` with finite target, comparator, and regime descriptor enums,
+  descriptor provenance guards, reference-only Paper 13 compatibility, and a
+  Lean contract proving the DBM-003 rung while keeping the full Paper 14
+  theorem open.
+- Recorded `DBM-004` as the active next obligation.

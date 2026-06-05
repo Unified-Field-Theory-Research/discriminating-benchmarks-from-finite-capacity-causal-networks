@@ -18,19 +18,22 @@ falsification success, or unified-field promotion.
   identifiers, target labels, comparator labels, regime labels, observable
   labels, expected-output descriptors, audit-status descriptors, and explicit
   non-promotion/non-validation guards.
+- `DBM-003`: Finite benchmark target, comparator, and regime descriptors with
+  bounded schema, audit-visible provenance, and reference-only Paper 13
+  compatibility.
 
 ## Active Rung
 
-- `DBM-003`: Define finite benchmark target, comparator, and regime
+- `DBM-004`: Define finite benchmark outcome, uncertainty, and audit-status
   descriptors.
 
-Required boundary for `DBM-003`:
+Required boundary for `DBM-004`:
 
-- finite target descriptors
-- finite comparator descriptors
-- finite regime descriptors
-- bounded descriptor schemas
-- audit-visible descriptor provenance
+- finite outcome descriptors
+- finite uncertainty descriptors
+- finite audit-status descriptors
+- bounded outcome schema
+- audit-visible uncertainty and status provenance
 - no benchmark recovery claim
 - no prediction success claim
 - no falsification success claim
@@ -43,8 +46,6 @@ Required boundary for `DBM-003`:
 
 ## Planned Rungs
 
-- `DBM-004`: finite benchmark outcome, uncertainty, and audit-status
-  descriptors
 - `DBM-005`: Paper 13 evidence-intake compatibility without validation
 - `DBM-006`: benchmark stability and coarse-graining behavior
 - `DBM-007`: no-hidden-promotion, validation, prediction, or falsification

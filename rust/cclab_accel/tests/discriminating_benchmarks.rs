@@ -3,8 +3,8 @@ use std::path::{Path, PathBuf};
 
 use cclab_accel::{
     active_obligation, paper14_skeleton_marker, DBM001UpstreamBinding, DBM002FiniteBenchmarkRecord,
-    Paper14SkeletonCertificate, PAPER13_FINAL_CERTIFICATE, PAPER13_FORMAL_ENDPOINT,
-    PAPER13_FROZEN_COMMIT,
+    DBM003TargetComparatorRegimeDescriptors, Paper14SkeletonCertificate, PAPER13_FINAL_CERTIFICATE,
+    PAPER13_FORMAL_ENDPOINT, PAPER13_FROZEN_COMMIT,
 };
 
 fn repo_root() -> PathBuf {
@@ -89,6 +89,33 @@ fn dbm002_skeleton_still_keeps_paper14_theorem_open() {
 }
 
 #[test]
+fn dbm003_defines_finite_target_comparator_regime_descriptors() {
+    let descriptors = DBM003TargetComparatorRegimeDescriptors::canonical();
+    assert!(descriptors.closes_dbm003());
+    assert!(descriptors.benchmark_record.closes_dbm002());
+    assert!(descriptors.target_descriptor_is_finite);
+    assert!(descriptors.comparator_descriptor_is_finite);
+    assert!(descriptors.regime_descriptor_is_finite);
+    assert!(descriptors.descriptor_schema_is_bounded);
+    assert!(descriptors.descriptor_provenance_audit_visible);
+    assert!(descriptors.paper13_compatibility_referenced_only);
+    assert!(descriptors
+        .claim_boundary
+        .all_physical_and_benchmark_claims_remain_false());
+}
+
+#[test]
+fn dbm003_skeleton_still_keeps_paper14_theorem_open() {
+    let skeleton = Paper14SkeletonCertificate::through_dbm003();
+    assert!(skeleton.dbm001_upstream_binding_closed);
+    assert!(skeleton.dbm002_finite_benchmark_record_closed);
+    assert!(skeleton.dbm003_target_comparator_regime_closed);
+    assert!(!skeleton.dbm004_outcome_uncertainty_audit_closed);
+    assert!(!skeleton.dbm008_final_conditional_certificate_closed);
+    assert!(!skeleton.closes_paper14_theorem());
+}
+
+#[test]
 fn upstream_json_records_paper13_certificate_and_nonpromotion() {
     let upstream = read_repo_file("UPSTREAM-PAPERS.json");
     assert!(upstream.contains(PAPER13_FROZEN_COMMIT));
@@ -102,14 +129,15 @@ fn upstream_json_records_paper13_certificate_and_nonpromotion() {
 }
 
 #[test]
-fn docs_keep_dbm003_active_and_physical_claims_false() {
+fn docs_keep_dbm004_active_and_physical_claims_false() {
     let state = read_repo_file("GPD/state.json");
     let state_md = read_repo_file("GPD/STATE.md");
     let theorem = read_repo_file("docs/discriminating_benchmarks_theorem.md");
 
-    assert_eq!(active_obligation(), "DBM-003");
-    assert!(state.contains("\"active_obligation\": \"DBM-003\""));
+    assert_eq!(active_obligation(), "DBM-004");
+    assert!(state.contains("\"active_obligation\": \"DBM-004\""));
     assert!(state.contains("\"dbm002_finite_benchmark_record_closed\": true"));
+    assert!(state.contains("\"dbm003_target_comparator_regime_closed\": true"));
     assert!(state.contains("\"discriminating_benchmarks_theorem_closed\": false"));
     assert!(state.contains("\"benchmark_recovery_claim\": false"));
     assert!(state.contains("\"prediction_success_claim\": false"));
@@ -117,8 +145,8 @@ fn docs_keep_dbm003_active_and_physical_claims_false() {
     assert!(state.contains("\"physical_promotion_claim\": false"));
     assert!(state.contains("\"physical_validation_claim\": false"));
     assert!(state.contains("\"empirical_adequacy_claim\": false"));
-    assert!(state_md.contains("local Paper 14 discriminating benchmarks theorem is not closed."));
-    assert!(theorem.contains("DBM-003"));
+    assert!(state_md.contains("discriminating benchmarks theorem is not closed."));
+    assert!(theorem.contains("DBM-004"));
     assert!(theorem.contains("no unified field theory claim"));
 }
 

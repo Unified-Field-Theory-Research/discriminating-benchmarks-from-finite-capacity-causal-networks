@@ -385,6 +385,103 @@ impl DBM002FiniteBenchmarkRecord {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum TargetDescriptorKind {
+    NetworkStateFamily,
+    LocalPatchFamily,
+    TransferInterfaceFamily,
+}
+
+impl TargetDescriptorKind {
+    pub const ALL: [Self; 3] = [
+        Self::NetworkStateFamily,
+        Self::LocalPatchFamily,
+        Self::TransferInterfaceFamily,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ComparatorDescriptorKind {
+    InternalReferenceRow,
+    CoarseGrainedReferenceRow,
+    UpstreamContractReferenceOnly,
+}
+
+impl ComparatorDescriptorKind {
+    pub const ALL: [Self; 3] = [
+        Self::InternalReferenceRow,
+        Self::CoarseGrainedReferenceRow,
+        Self::UpstreamContractReferenceOnly,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum RegimeDescriptorKind {
+    FiniteLocalWindow,
+    BoundedTransferWindow,
+    CoarseGrainingWindow,
+}
+
+impl RegimeDescriptorKind {
+    pub const ALL: [Self; 3] = [
+        Self::FiniteLocalWindow,
+        Self::BoundedTransferWindow,
+        Self::CoarseGrainingWindow,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct DBM003TargetComparatorRegimeDescriptors {
+    pub benchmark_record: DBM002FiniteBenchmarkRecord,
+    pub target_descriptor: TargetDescriptorKind,
+    pub comparator_descriptor: ComparatorDescriptorKind,
+    pub regime_descriptor: RegimeDescriptorKind,
+    pub target_descriptor_is_finite: bool,
+    pub comparator_descriptor_is_finite: bool,
+    pub regime_descriptor_is_finite: bool,
+    pub descriptor_schema_is_bounded: bool,
+    pub descriptor_provenance_audit_visible: bool,
+    pub paper13_compatibility_referenced_only: bool,
+    pub claim_boundary: Paper14ClaimBoundary,
+}
+
+impl DBM003TargetComparatorRegimeDescriptors {
+    pub const fn canonical() -> Self {
+        Self {
+            benchmark_record: DBM002FiniteBenchmarkRecord::canonical(),
+            target_descriptor: TargetDescriptorKind::NetworkStateFamily,
+            comparator_descriptor: ComparatorDescriptorKind::InternalReferenceRow,
+            regime_descriptor: RegimeDescriptorKind::FiniteLocalWindow,
+            target_descriptor_is_finite: true,
+            comparator_descriptor_is_finite: true,
+            regime_descriptor_is_finite: true,
+            descriptor_schema_is_bounded: true,
+            descriptor_provenance_audit_visible: true,
+            paper13_compatibility_referenced_only: true,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_dbm003(&self) -> bool {
+        self.benchmark_record.closes_dbm002()
+            && !TargetDescriptorKind::ALL.is_empty()
+            && !ComparatorDescriptorKind::ALL.is_empty()
+            && !RegimeDescriptorKind::ALL.is_empty()
+            && TargetDescriptorKind::ALL.contains(&self.target_descriptor)
+            && ComparatorDescriptorKind::ALL.contains(&self.comparator_descriptor)
+            && RegimeDescriptorKind::ALL.contains(&self.regime_descriptor)
+            && self.target_descriptor_is_finite
+            && self.comparator_descriptor_is_finite
+            && self.regime_descriptor_is_finite
+            && self.descriptor_schema_is_bounded
+            && self.descriptor_provenance_audit_visible
+            && self.paper13_compatibility_referenced_only
+            && self
+                .claim_boundary
+                .all_physical_and_benchmark_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper14SkeletonCertificate {
     pub dbm001_upstream_binding_closed: bool,
     pub dbm002_finite_benchmark_record_closed: bool,
@@ -426,6 +523,20 @@ impl Paper14SkeletonCertificate {
         }
     }
 
+    pub const fn through_dbm003() -> Self {
+        Self {
+            dbm001_upstream_binding_closed: true,
+            dbm002_finite_benchmark_record_closed: true,
+            dbm003_target_comparator_regime_closed: true,
+            dbm004_outcome_uncertainty_audit_closed: false,
+            dbm005_paper13_intake_compatibility_closed: false,
+            dbm006_stability_coarse_graining_closed: false,
+            dbm007_no_hidden_promotion_validation_prediction_audit_closed: false,
+            dbm008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper14_theorem(&self) -> bool {
         self.dbm001_upstream_binding_closed
             && self.dbm002_finite_benchmark_record_closed
@@ -450,5 +561,5 @@ pub fn is_sha1_hex(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "DBM-003"
+    "DBM-004"
 }

@@ -8,9 +8,10 @@ claim-boundary preservation through the frozen Paper 13 external physical
 evidence intake certificate.
 
 The local theorem is not closed. `DBM-002` defines finite discriminating
-benchmark records as bounded, auditable, non-promoting interface rows. The
-active next obligation is `DBM-003`: define finite benchmark target,
-comparator, and regime descriptors.
+benchmark records as bounded, auditable, non-promoting interface rows.
+`DBM-003` defines finite benchmark target, comparator, and regime descriptors.
+The active next obligation is `DBM-004`: define finite benchmark outcome,
+uncertainty, and audit-status descriptors.
 
 ## Claim Boundary
 

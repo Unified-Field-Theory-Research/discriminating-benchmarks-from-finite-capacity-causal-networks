@@ -12,12 +12,14 @@ claim-boundary scaffold through the frozen Paper 13 result:
 - Paper 13 canonical proof:
   `paper13_epei008_final_conditional_certificate_closes_external_physical_evidence_intake_theorem`
 
-`DBM-002` is also closed as a finite benchmark-record interface rung. The
-local Paper 14 discriminating benchmarks theorem is not closed.
+`DBM-002` is also closed as a finite benchmark-record interface rung. `DBM-003`
+is closed as a finite target, comparator, and regime descriptor rung. The local
+Paper 14 discriminating benchmarks theorem is not closed.
 
 ## Active Obligation
 
-`DBM-003`: Define finite benchmark target, comparator, and regime descriptors.
+`DBM-004`: Define finite benchmark outcome, uncertainty, and audit-status
+descriptors.
 
 The descriptors must remain finite, bounded, auditable, and non-promoting. They
 must not
@@ -31,6 +33,7 @@ calibration, physical nature realization, or a unified field theory.
 
 - `DBM-001`: Upstream binding and claim-boundary scaffold.
 - `DBM-002`: Finite discriminating benchmark records.
+- `DBM-003`: Finite benchmark target, comparator, and regime descriptors.
 
 ## Claim Boundary
 
