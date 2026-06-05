@@ -741,6 +741,96 @@ impl DBM006StabilityCoarseGraining {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum HiddenImportBlocker {
+    BenchmarkRecovery,
+    PredictionSuccess,
+    FalsificationClosure,
+    PhysicalPromotion,
+    PhysicalValidation,
+    EmpiricalAdequacy,
+    ObservedCatalogRecovery,
+    SimulationOnlyPromotion,
+    FitOnlyCalibration,
+    PhysicalNatureRealization,
+    UnifiedFieldTheoryPromotion,
+}
+
+pub const HIDDEN_IMPORT_BLOCKERS: [HiddenImportBlocker; 11] = [
+    HiddenImportBlocker::BenchmarkRecovery,
+    HiddenImportBlocker::PredictionSuccess,
+    HiddenImportBlocker::FalsificationClosure,
+    HiddenImportBlocker::PhysicalPromotion,
+    HiddenImportBlocker::PhysicalValidation,
+    HiddenImportBlocker::EmpiricalAdequacy,
+    HiddenImportBlocker::ObservedCatalogRecovery,
+    HiddenImportBlocker::SimulationOnlyPromotion,
+    HiddenImportBlocker::FitOnlyCalibration,
+    HiddenImportBlocker::PhysicalNatureRealization,
+    HiddenImportBlocker::UnifiedFieldTheoryPromotion,
+];
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct DBM007NoHiddenImportAudit {
+    pub stability: DBM006StabilityCoarseGraining,
+    pub hidden_import_blockers: &'static [HiddenImportBlocker],
+    pub finite_audit_rows: bool,
+    pub fail_closed_promotion_gate: bool,
+    pub fail_closed_validation_gate: bool,
+    pub fail_closed_prediction_gate: bool,
+    pub fail_closed_falsification_gate: bool,
+    pub rejects_simulation_only_promotion: bool,
+    pub rejects_fit_only_calibration: bool,
+    pub rejects_physical_nature_realization: bool,
+    pub rejects_unified_field_theory_promotion: bool,
+    pub no_hidden_empirical_adequacy_import: bool,
+    pub no_hidden_observed_catalog_recovery_import: bool,
+    pub claim_boundary: Paper14ClaimBoundary,
+}
+
+impl DBM007NoHiddenImportAudit {
+    pub const fn canonical() -> Self {
+        Self {
+            stability: DBM006StabilityCoarseGraining::canonical(),
+            hidden_import_blockers: &HIDDEN_IMPORT_BLOCKERS,
+            finite_audit_rows: true,
+            fail_closed_promotion_gate: true,
+            fail_closed_validation_gate: true,
+            fail_closed_prediction_gate: true,
+            fail_closed_falsification_gate: true,
+            rejects_simulation_only_promotion: true,
+            rejects_fit_only_calibration: true,
+            rejects_physical_nature_realization: true,
+            rejects_unified_field_theory_promotion: true,
+            no_hidden_empirical_adequacy_import: true,
+            no_hidden_observed_catalog_recovery_import: true,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_dbm007(&self) -> bool {
+        self.stability.closes_dbm006()
+            && self.hidden_import_blockers.len() == HIDDEN_IMPORT_BLOCKERS.len()
+            && HIDDEN_IMPORT_BLOCKERS
+                .iter()
+                .all(|blocker| self.hidden_import_blockers.contains(blocker))
+            && self.finite_audit_rows
+            && self.fail_closed_promotion_gate
+            && self.fail_closed_validation_gate
+            && self.fail_closed_prediction_gate
+            && self.fail_closed_falsification_gate
+            && self.rejects_simulation_only_promotion
+            && self.rejects_fit_only_calibration
+            && self.rejects_physical_nature_realization
+            && self.rejects_unified_field_theory_promotion
+            && self.no_hidden_empirical_adequacy_import
+            && self.no_hidden_observed_catalog_recovery_import
+            && self
+                .claim_boundary
+                .all_physical_and_benchmark_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper14SkeletonCertificate {
     pub dbm001_upstream_binding_closed: bool,
     pub dbm002_finite_benchmark_record_closed: bool,
@@ -838,6 +928,20 @@ impl Paper14SkeletonCertificate {
         }
     }
 
+    pub const fn through_dbm007() -> Self {
+        Self {
+            dbm001_upstream_binding_closed: true,
+            dbm002_finite_benchmark_record_closed: true,
+            dbm003_target_comparator_regime_closed: true,
+            dbm004_outcome_uncertainty_audit_closed: true,
+            dbm005_paper13_intake_compatibility_closed: true,
+            dbm006_stability_coarse_graining_closed: true,
+            dbm007_no_hidden_promotion_validation_prediction_audit_closed: true,
+            dbm008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper14_theorem(&self) -> bool {
         self.dbm001_upstream_binding_closed
             && self.dbm002_finite_benchmark_record_closed
@@ -862,5 +966,5 @@ pub fn is_sha1_hex(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "DBM-007"
+    "DBM-008"
 }

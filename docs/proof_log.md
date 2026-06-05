@@ -34,3 +34,9 @@
   blockers, and a Lean contract proving the DBM-006 rung while keeping the full
   Paper 14 theorem open.
 - Recorded `DBM-007` as the active next obligation.
+- Closed `DBM-007` with a finite hidden-import blocker set, fail-closed
+  promotion/validation/prediction/falsification gates, simulation-only and
+  fit-only shortcut rejection, physical-nature and unified-field rejection, and
+  a Lean contract proving the DBM-007 rung while keeping the full Paper 14
+  theorem open.
+- Recorded `DBM-008` as the active final certificate obligation.

@@ -13,8 +13,9 @@ benchmark records as bounded, auditable, non-promoting interface rows.
 `DBM-004` defines finite benchmark outcome, uncertainty, and audit-status
 descriptors. `DBM-005` defines Paper 13 evidence-intake compatibility without
 validation. `DBM-006` defines benchmark stability and coarse-graining behavior.
-The active next obligation is `DBM-007`: audit for hidden promotion,
-validation, prediction, or falsification imports.
+`DBM-007` audits for hidden promotion, validation, prediction, or falsification
+imports. The active next obligation is `DBM-008`: assemble the final
+conditional certificate.
 
 ## Claim Boundary
 

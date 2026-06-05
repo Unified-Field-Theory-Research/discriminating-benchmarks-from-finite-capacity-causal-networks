@@ -696,6 +696,120 @@ theorem dbm006_canonical_stability_coarse_graining_closed :
   simp
 
 /--
+`DBM-007` is the no-hidden-import audit. It makes promotion, validation,
+prediction, falsification, empirical adequacy, simulation-only promotion,
+fit-only calibration, physical nature, and unified-field shortcuts fail closed.
+-/
+structure DBM007NoHiddenPromotionValidationPredictionAuditContract where
+  dbm006StabilityCoarseGrainingClosed : Prop
+  finiteHiddenImportAuditRows : Prop
+  failClosedPromotionGate : Prop
+  failClosedValidationGate : Prop
+  failClosedPredictionGate : Prop
+  failClosedFalsificationGate : Prop
+  rejectsSimulationOnlyPromotion : Prop
+  rejectsFitOnlyCalibration : Prop
+  rejectsPhysicalNatureRealization : Prop
+  rejectsUnifiedFieldTheoryPromotion : Prop
+  noHiddenEmpiricalAdequacyImport : Prop
+  noHiddenObservedCatalogRecoveryImport : Prop
+  noBenchmarkRecoveryClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def DBM007NoHiddenPromotionValidationPredictionAuditContract.closed
+    (c : DBM007NoHiddenPromotionValidationPredictionAuditContract) : Prop :=
+  c.dbm006StabilityCoarseGrainingClosed ∧
+  c.finiteHiddenImportAuditRows ∧
+  c.failClosedPromotionGate ∧
+  c.failClosedValidationGate ∧
+  c.failClosedPredictionGate ∧
+  c.failClosedFalsificationGate ∧
+  c.rejectsSimulationOnlyPromotion ∧
+  c.rejectsFitOnlyCalibration ∧
+  c.rejectsPhysicalNatureRealization ∧
+  c.rejectsUnifiedFieldTheoryPromotion ∧
+  c.noHiddenEmpiricalAdequacyImport ∧
+  c.noHiddenObservedCatalogRecoveryImport ∧
+  c.noBenchmarkRecoveryClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+theorem dbm007_no_hidden_import_audit_closed_from_fields
+    (c : DBM007NoHiddenPromotionValidationPredictionAuditContract)
+    (hDBM006 : c.dbm006StabilityCoarseGrainingClosed)
+    (hRows : c.finiteHiddenImportAuditRows)
+    (hPromotionGate : c.failClosedPromotionGate)
+    (hValidationGate : c.failClosedValidationGate)
+    (hPredictionGate : c.failClosedPredictionGate)
+    (hFalsificationGate : c.failClosedFalsificationGate)
+    (hRejectSimulation : c.rejectsSimulationOnlyPromotion)
+    (hRejectFit : c.rejectsFitOnlyCalibration)
+    (hRejectNature : c.rejectsPhysicalNatureRealization)
+    (hRejectUFT : c.rejectsUnifiedFieldTheoryPromotion)
+    (hNoEmpiricalImport : c.noHiddenEmpiricalAdequacyImport)
+    (hNoObservedImport : c.noHiddenObservedCatalogRecoveryImport)
+    (hNoBenchmarkRecovery : c.noBenchmarkRecoveryClaim)
+    (hNoPrediction : c.noPredictionSuccessClaim)
+    (hNoFalsification : c.noFalsificationSuccessClaim)
+    (hNoPromotion : c.noPhysicalPromotionClaim)
+    (hNoValidation : c.noPhysicalValidationClaim)
+    (hNoEmpirical : c.noEmpiricalAdequacyClaim)
+    (hNoNature : c.noPhysicalNatureClaim)
+    (hNoUFT : c.noUnifiedFieldTheoryClaim) :
+    DBM007NoHiddenPromotionValidationPredictionAuditContract.closed c := by
+  unfold DBM007NoHiddenPromotionValidationPredictionAuditContract.closed
+  exact ⟨hDBM006, hRows, hPromotionGate, hValidationGate, hPredictionGate,
+    hFalsificationGate, hRejectSimulation, hRejectFit, hRejectNature,
+    hRejectUFT, hNoEmpiricalImport, hNoObservedImport, hNoBenchmarkRecovery,
+    hNoPrediction, hNoFalsification, hNoPromotion, hNoValidation,
+    hNoEmpirical, hNoNature, hNoUFT⟩
+
+def dbm007CanonicalNoHiddenPromotionValidationPredictionAuditContract :
+    DBM007NoHiddenPromotionValidationPredictionAuditContract :=
+  {
+    dbm006StabilityCoarseGrainingClosed :=
+      DBM006StabilityCoarseGrainingContract.closed
+        dbm006CanonicalStabilityCoarseGrainingContract,
+    finiteHiddenImportAuditRows := True,
+    failClosedPromotionGate := True,
+    failClosedValidationGate := True,
+    failClosedPredictionGate := True,
+    failClosedFalsificationGate := True,
+    rejectsSimulationOnlyPromotion := True,
+    rejectsFitOnlyCalibration := True,
+    rejectsPhysicalNatureRealization := True,
+    rejectsUnifiedFieldTheoryPromotion := True,
+    noHiddenEmpiricalAdequacyImport := True,
+    noHiddenObservedCatalogRecoveryImport := True,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem dbm007_canonical_no_hidden_import_audit_closed :
+    DBM007NoHiddenPromotionValidationPredictionAuditContract.closed
+      dbm007CanonicalNoHiddenPromotionValidationPredictionAuditContract := by
+  unfold DBM007NoHiddenPromotionValidationPredictionAuditContract.closed
+  unfold dbm007CanonicalNoHiddenPromotionValidationPredictionAuditContract
+  simp
+
+/--
 The full Paper 14 theorem stays closed only after a future final conditional
 certificate. `DBM-001` intentionally leaves that field false.
 -/
@@ -904,6 +1018,41 @@ def paper14DBM006SkeletonContract :
     noUnifiedFieldTheoryClaim := True
   }
 
+def paper14DBM007SkeletonContract :
+    Paper14DiscriminatingBenchmarksTheoremContract :=
+  {
+    dbm001UpstreamBindingClosed :=
+      DBM001UpstreamBindingContract.closed
+        dbm001CanonicalUpstreamBindingContract,
+    dbm002FiniteBenchmarkRecordClosed :=
+      DBM002FiniteBenchmarkRecordContract.closed
+        dbm002CanonicalFiniteBenchmarkRecordContract,
+    dbm003TargetComparatorRegimeClosed :=
+      DBM003TargetComparatorRegimeDescriptorContract.closed
+        dbm003CanonicalTargetComparatorRegimeDescriptorContract,
+    dbm004OutcomeUncertaintyAuditClosed :=
+      DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+        dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract,
+    dbm005Paper13IntakeCompatibilityClosed :=
+      DBM005Paper13IntakeCompatibilityContract.closed
+        dbm005CanonicalPaper13IntakeCompatibilityContract,
+    dbm006StabilityCoarseGrainingClosed :=
+      DBM006StabilityCoarseGrainingContract.closed
+        dbm006CanonicalStabilityCoarseGrainingContract,
+    dbm007NoHiddenPromotionValidationPredictionAuditClosed :=
+      DBM007NoHiddenPromotionValidationPredictionAuditContract.closed
+        dbm007CanonicalNoHiddenPromotionValidationPredictionAuditContract,
+    dbm008FinalConditionalCertificateClosed := False,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
 theorem paper14_dbm001_skeleton_does_not_close_discriminating_benchmarks_theorem :
     ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
       paper14InitialDBM001SkeletonContract := by
@@ -944,6 +1093,13 @@ theorem paper14_dbm006_skeleton_does_not_close_discriminating_benchmarks_theorem
       paper14DBM006SkeletonContract := by
   unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
   unfold paper14DBM006SkeletonContract
+  simp
+
+theorem paper14_dbm007_skeleton_does_not_close_discriminating_benchmarks_theorem :
+    ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
+      paper14DBM007SkeletonContract := by
+  unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
+  unfold paper14DBM007SkeletonContract
   simp
 
 end FiniteCapacity

@@ -30,19 +30,22 @@ falsification success, or unified-field promotion.
 - `DBM-006`: Benchmark stability and coarse-graining behavior as finite,
   benchmark-local maps that preserve audit boundaries without asserting
   validation or physical promotion.
+- `DBM-007`: No-hidden-promotion, validation, prediction, or falsification
+  import audit with fail-closed blockers for simulation-only promotion,
+  fit-only calibration, physical nature realization, and unified-field
+  promotion.
 
 ## Active Rung
 
-- `DBM-007`: No-hidden-promotion, validation, prediction, or falsification
-  import audit.
+- `DBM-008`: Final conditional certificate.
 
-Required boundary for `DBM-007`:
+Required boundary for `DBM-008`:
 
-- finite audit rows
-- explicit hidden-import blockers
-- fail-closed promotion gate
-- fail-closed validation gate
-- fail-closed prediction and falsification gates
+- all prior DBM rungs closed
+- final certificate remains conditional
+- theorem closure is an interface theorem only
+- no benchmark pass/recovery claim
+- no physical validation or promotion claim
 - no benchmark recovery claim
 - no prediction success claim
 - no falsification success claim
@@ -55,7 +58,7 @@ Required boundary for `DBM-007`:
 
 ## Planned Rungs
 
-- `DBM-008`: final conditional certificate
+No planned rungs remain before final closure.
 
 ## Residual Risk
 

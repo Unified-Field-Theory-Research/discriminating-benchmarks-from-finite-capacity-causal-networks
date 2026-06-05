@@ -11,16 +11,17 @@
   descriptors.
 - `DBM-005`: Paper 13 evidence-intake compatibility without validation.
 - `DBM-006`: Benchmark stability and coarse-graining behavior.
+- `DBM-007`: No-hidden-promotion, validation, prediction, or falsification
+  import audit.
 
 ## Active
 
-- `DBM-007`: Audit for hidden physical-promotion, validation, prediction, or
-  falsification imports.
+- `DBM-008`: Assemble the final conditional discriminating benchmarks
+  certificate.
 
 ## Planned
 
-- `DBM-008`: Assemble the final conditional discriminating benchmarks
-  certificate.
+No planned rungs remain before final closure.
 
 All planned rungs remain conditional and non-promoting unless explicitly
 closed by formal and Rust guards.
