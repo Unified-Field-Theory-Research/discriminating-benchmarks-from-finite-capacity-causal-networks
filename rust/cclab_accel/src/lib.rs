@@ -205,6 +205,186 @@ impl DBM001UpstreamBinding {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum BenchmarkIdentifier {
+    LocalConservationTransfer,
+    CausalConeSeparation,
+    BoundedObservableReadout,
+}
+
+impl BenchmarkIdentifier {
+    pub const ALL: [Self; 3] = [
+        Self::LocalConservationTransfer,
+        Self::CausalConeSeparation,
+        Self::BoundedObservableReadout,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum BenchmarkTargetLabel {
+    FiniteCapacityNetwork,
+    LocalCausalPatch,
+    BoundedTransferInterface,
+}
+
+impl BenchmarkTargetLabel {
+    pub const ALL: [Self; 3] = [
+        Self::FiniteCapacityNetwork,
+        Self::LocalCausalPatch,
+        Self::BoundedTransferInterface,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ComparatorLabel {
+    InternalBaseline,
+    CoarseGrainedVariant,
+    UpstreamContractReference,
+}
+
+impl ComparatorLabel {
+    pub const ALL: [Self; 3] = [
+        Self::InternalBaseline,
+        Self::CoarseGrainedVariant,
+        Self::UpstreamContractReference,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum RegimeLabel {
+    FiniteLocal,
+    BoundedTransfer,
+    CoarseGrained,
+}
+
+impl RegimeLabel {
+    pub const ALL: [Self; 3] = [
+        Self::FiniteLocal,
+        Self::BoundedTransfer,
+        Self::CoarseGrained,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ObservableLabel {
+    ConservationLedger,
+    CausalConeLedger,
+    EvidenceCompatibilityLedger,
+}
+
+impl ObservableLabel {
+    pub const ALL: [Self; 3] = [
+        Self::ConservationLedger,
+        Self::CausalConeLedger,
+        Self::EvidenceCompatibilityLedger,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ExpectedOutputDescriptor {
+    BoundedLedgerRow,
+    FiniteComparisonRow,
+    AuditOnlyCompatibilityRow,
+}
+
+impl ExpectedOutputDescriptor {
+    pub const ALL: [Self; 3] = [
+        Self::BoundedLedgerRow,
+        Self::FiniteComparisonRow,
+        Self::AuditOnlyCompatibilityRow,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum AuditStatusDescriptor {
+    PendingAudit,
+    PassedNonPromotionAudit,
+    BlockedByClaimBoundary,
+}
+
+impl AuditStatusDescriptor {
+    pub const ALL: [Self; 3] = [
+        Self::PendingAudit,
+        Self::PassedNonPromotionAudit,
+        Self::BlockedByClaimBoundary,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct DBM002FiniteBenchmarkRecord {
+    pub benchmark_id: BenchmarkIdentifier,
+    pub target_label: BenchmarkTargetLabel,
+    pub comparator_label: ComparatorLabel,
+    pub regime_label: RegimeLabel,
+    pub observable_label: ObservableLabel,
+    pub expected_output: ExpectedOutputDescriptor,
+    pub audit_status: AuditStatusDescriptor,
+    pub paper13_compatibility_referenced_only: bool,
+    pub no_benchmark_recovery_claim: bool,
+    pub no_prediction_success_claim: bool,
+    pub no_falsification_success_claim: bool,
+    pub no_physical_promotion_claim: bool,
+    pub no_physical_validation_claim: bool,
+    pub no_empirical_adequacy_claim: bool,
+    pub no_observed_catalog_recovery_claim: bool,
+    pub no_simulation_only_promotion: bool,
+    pub no_fit_only_calibration_claim: bool,
+    pub no_unified_field_theory_claim: bool,
+}
+
+impl DBM002FiniteBenchmarkRecord {
+    pub const fn canonical() -> Self {
+        Self {
+            benchmark_id: BenchmarkIdentifier::LocalConservationTransfer,
+            target_label: BenchmarkTargetLabel::FiniteCapacityNetwork,
+            comparator_label: ComparatorLabel::InternalBaseline,
+            regime_label: RegimeLabel::FiniteLocal,
+            observable_label: ObservableLabel::ConservationLedger,
+            expected_output: ExpectedOutputDescriptor::BoundedLedgerRow,
+            audit_status: AuditStatusDescriptor::PassedNonPromotionAudit,
+            paper13_compatibility_referenced_only: true,
+            no_benchmark_recovery_claim: true,
+            no_prediction_success_claim: true,
+            no_falsification_success_claim: true,
+            no_physical_promotion_claim: true,
+            no_physical_validation_claim: true,
+            no_empirical_adequacy_claim: true,
+            no_observed_catalog_recovery_claim: true,
+            no_simulation_only_promotion: true,
+            no_fit_only_calibration_claim: true,
+            no_unified_field_theory_claim: true,
+        }
+    }
+
+    pub fn closes_dbm002(&self) -> bool {
+        !BenchmarkIdentifier::ALL.is_empty()
+            && !BenchmarkTargetLabel::ALL.is_empty()
+            && !ComparatorLabel::ALL.is_empty()
+            && !RegimeLabel::ALL.is_empty()
+            && !ObservableLabel::ALL.is_empty()
+            && !ExpectedOutputDescriptor::ALL.is_empty()
+            && !AuditStatusDescriptor::ALL.is_empty()
+            && BenchmarkIdentifier::ALL.contains(&self.benchmark_id)
+            && BenchmarkTargetLabel::ALL.contains(&self.target_label)
+            && ComparatorLabel::ALL.contains(&self.comparator_label)
+            && RegimeLabel::ALL.contains(&self.regime_label)
+            && ObservableLabel::ALL.contains(&self.observable_label)
+            && ExpectedOutputDescriptor::ALL.contains(&self.expected_output)
+            && AuditStatusDescriptor::ALL.contains(&self.audit_status)
+            && self.paper13_compatibility_referenced_only
+            && self.no_benchmark_recovery_claim
+            && self.no_prediction_success_claim
+            && self.no_falsification_success_claim
+            && self.no_physical_promotion_claim
+            && self.no_physical_validation_claim
+            && self.no_empirical_adequacy_claim
+            && self.no_observed_catalog_recovery_claim
+            && self.no_simulation_only_promotion
+            && self.no_fit_only_calibration_claim
+            && self.no_unified_field_theory_claim
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper14SkeletonCertificate {
     pub dbm001_upstream_binding_closed: bool,
     pub dbm002_finite_benchmark_record_closed: bool,
@@ -222,6 +402,20 @@ impl Paper14SkeletonCertificate {
         Self {
             dbm001_upstream_binding_closed: true,
             dbm002_finite_benchmark_record_closed: false,
+            dbm003_target_comparator_regime_closed: false,
+            dbm004_outcome_uncertainty_audit_closed: false,
+            dbm005_paper13_intake_compatibility_closed: false,
+            dbm006_stability_coarse_graining_closed: false,
+            dbm007_no_hidden_promotion_validation_prediction_audit_closed: false,
+            dbm008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub const fn through_dbm002() -> Self {
+        Self {
+            dbm001_upstream_binding_closed: true,
+            dbm002_finite_benchmark_record_closed: true,
             dbm003_target_comparator_regime_closed: false,
             dbm004_outcome_uncertainty_audit_closed: false,
             dbm005_paper13_intake_compatibility_closed: false,
@@ -256,5 +450,5 @@ pub fn is_sha1_hex(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "DBM-002"
+    "DBM-003"
 }

@@ -4,18 +4,18 @@
 
 - `DBM-001`: Upstream binding and claim-boundary scaffold through the frozen
   Paper 13 final conditional external physical evidence intake certificate.
+- `DBM-002`: Finite discriminating benchmark records as bounded, auditable,
+  non-promoting interface rows.
 
 ## Active
 
-- `DBM-002`: Define finite discriminating benchmark records without importing
-  physical promotion, physical validation, empirical adequacy,
-  observed-catalog recovery, prediction success, falsification closure,
-  simulation-only promotion, or fit-only calibration.
+- `DBM-003`: Define finite benchmark target, comparator, and regime
+  descriptors without importing physical promotion, physical validation,
+  empirical adequacy, observed-catalog recovery, prediction success,
+  falsification closure, simulation-only promotion, or fit-only calibration.
 
 ## Planned
 
-- `DBM-003`: Define finite benchmark target, comparator, and regime
-  descriptors.
 - `DBM-004`: Define finite benchmark outcome, uncertainty, and audit-status
   descriptors.
 - `DBM-005`: Define compatibility with Paper 13 evidence-intake rows without

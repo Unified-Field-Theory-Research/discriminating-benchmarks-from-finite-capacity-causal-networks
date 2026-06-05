@@ -7,9 +7,10 @@ The repository begins with `DBM-001` closed: upstream binding and
 claim-boundary preservation through the frozen Paper 13 external physical
 evidence intake certificate.
 
-The local theorem is not closed. The active next obligation is `DBM-002`:
-define finite discriminating benchmark records as bounded, auditable,
-non-promoting interface rows.
+The local theorem is not closed. `DBM-002` defines finite discriminating
+benchmark records as bounded, auditable, non-promoting interface rows. The
+active next obligation is `DBM-003`: define finite benchmark target,
+comparator, and regime descriptors.
 
 ## Claim Boundary
 

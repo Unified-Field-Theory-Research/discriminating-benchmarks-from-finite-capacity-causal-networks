@@ -14,20 +14,23 @@ falsification success, or unified-field promotion.
 
 - `DBM-001`: Upstream binding and claim-boundary scaffold through the frozen
   Paper 13 final conditional certificate.
+- `DBM-002`: Finite discriminating benchmark records with bounded benchmark
+  identifiers, target labels, comparator labels, regime labels, observable
+  labels, expected-output descriptors, audit-status descriptors, and explicit
+  non-promotion/non-validation guards.
 
 ## Active Rung
 
-- `DBM-002`: Define finite discriminating benchmark records.
+- `DBM-003`: Define finite benchmark target, comparator, and regime
+  descriptors.
 
-Required boundary for `DBM-002`:
+Required boundary for `DBM-003`:
 
-- finite benchmark identifiers
-- finite target labels
-- finite comparator labels
-- finite regime labels
-- finite observable labels
-- finite expected-output descriptors
-- finite audit-status descriptors
+- finite target descriptors
+- finite comparator descriptors
+- finite regime descriptors
+- bounded descriptor schemas
+- audit-visible descriptor provenance
 - no benchmark recovery claim
 - no prediction success claim
 - no falsification success claim
@@ -40,7 +43,6 @@ Required boundary for `DBM-002`:
 
 ## Planned Rungs
 
-- `DBM-003`: finite benchmark target, comparator, and regime descriptors
 - `DBM-004`: finite benchmark outcome, uncertainty, and audit-status
   descriptors
 - `DBM-005`: Paper 13 evidence-intake compatibility without validation

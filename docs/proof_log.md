@@ -9,3 +9,8 @@
 - Added fail-closed Rust and Lean guards showing the initial skeleton does not
   close the discriminating benchmarks theorem.
 - Recorded `DBM-002` as the active next obligation.
+- Closed `DBM-002` with finite benchmark-record enums, a canonical
+  non-promoting audit row, Rust guards for claim-boundary rejection, and a Lean
+  contract proving the DBM-002 rung while keeping the full Paper 14 theorem
+  open.
+- Recorded `DBM-003` as the active next obligation.

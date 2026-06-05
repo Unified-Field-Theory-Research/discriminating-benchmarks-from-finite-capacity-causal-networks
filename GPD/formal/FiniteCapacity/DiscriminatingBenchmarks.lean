@@ -137,6 +137,119 @@ theorem dbm001_canonical_upstream_binding_closed :
   simp
 
 /--
+`DBM-002` defines finite discriminating benchmark records as bounded,
+auditable, non-promoting interface rows. The fields are record-level gates only:
+they do not assert benchmark recovery, prediction success, falsification
+success, validation, empirical adequacy, or physical promotion.
+-/
+structure DBM002FiniteBenchmarkRecordContract where
+  finiteBenchmarkIdentifier : Prop
+  finiteTargetLabel : Prop
+  finiteComparatorLabel : Prop
+  finiteRegimeLabel : Prop
+  finiteObservableLabel : Prop
+  finiteExpectedOutputDescriptor : Prop
+  finiteAuditStatusDescriptor : Prop
+  boundedRecordSchema : Prop
+  auditableRecordSchema : Prop
+  paper13CompatibilityReferencedOnly : Prop
+  noBenchmarkRecoveryClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noObservedCatalogRecoveryClaim : Prop
+  noSimulationOnlyPromotion : Prop
+  noFitOnlyCalibrationClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def DBM002FiniteBenchmarkRecordContract.closed
+    (c : DBM002FiniteBenchmarkRecordContract) : Prop :=
+  c.finiteBenchmarkIdentifier ∧
+  c.finiteTargetLabel ∧
+  c.finiteComparatorLabel ∧
+  c.finiteRegimeLabel ∧
+  c.finiteObservableLabel ∧
+  c.finiteExpectedOutputDescriptor ∧
+  c.finiteAuditStatusDescriptor ∧
+  c.boundedRecordSchema ∧
+  c.auditableRecordSchema ∧
+  c.paper13CompatibilityReferencedOnly ∧
+  c.noBenchmarkRecoveryClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noObservedCatalogRecoveryClaim ∧
+  c.noSimulationOnlyPromotion ∧
+  c.noFitOnlyCalibrationClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+theorem dbm002_finite_benchmark_record_closed_from_fields
+    (c : DBM002FiniteBenchmarkRecordContract)
+    (hId : c.finiteBenchmarkIdentifier)
+    (hTarget : c.finiteTargetLabel)
+    (hComparator : c.finiteComparatorLabel)
+    (hRegime : c.finiteRegimeLabel)
+    (hObservable : c.finiteObservableLabel)
+    (hExpected : c.finiteExpectedOutputDescriptor)
+    (hAuditStatus : c.finiteAuditStatusDescriptor)
+    (hBounded : c.boundedRecordSchema)
+    (hAuditable : c.auditableRecordSchema)
+    (hPaper13Reference : c.paper13CompatibilityReferencedOnly)
+    (hNoBenchmarkRecovery : c.noBenchmarkRecoveryClaim)
+    (hNoPrediction : c.noPredictionSuccessClaim)
+    (hNoFalsification : c.noFalsificationSuccessClaim)
+    (hNoPromotion : c.noPhysicalPromotionClaim)
+    (hNoValidation : c.noPhysicalValidationClaim)
+    (hNoEmpirical : c.noEmpiricalAdequacyClaim)
+    (hNoObserved : c.noObservedCatalogRecoveryClaim)
+    (hNoSimulation : c.noSimulationOnlyPromotion)
+    (hNoFit : c.noFitOnlyCalibrationClaim)
+    (hNoUFT : c.noUnifiedFieldTheoryClaim) :
+    DBM002FiniteBenchmarkRecordContract.closed c := by
+  unfold DBM002FiniteBenchmarkRecordContract.closed
+  exact ⟨hId, hTarget, hComparator, hRegime, hObservable, hExpected,
+    hAuditStatus, hBounded, hAuditable, hPaper13Reference,
+    hNoBenchmarkRecovery, hNoPrediction, hNoFalsification, hNoPromotion,
+    hNoValidation, hNoEmpirical, hNoObserved, hNoSimulation, hNoFit,
+    hNoUFT⟩
+
+def dbm002CanonicalFiniteBenchmarkRecordContract :
+    DBM002FiniteBenchmarkRecordContract :=
+  {
+    finiteBenchmarkIdentifier := True,
+    finiteTargetLabel := True,
+    finiteComparatorLabel := True,
+    finiteRegimeLabel := True,
+    finiteObservableLabel := True,
+    finiteExpectedOutputDescriptor := True,
+    finiteAuditStatusDescriptor := True,
+    boundedRecordSchema := True,
+    auditableRecordSchema := True,
+    paper13CompatibilityReferencedOnly := True,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noObservedCatalogRecoveryClaim := True,
+    noSimulationOnlyPromotion := True,
+    noFitOnlyCalibrationClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem dbm002_canonical_finite_benchmark_record_closed :
+    DBM002FiniteBenchmarkRecordContract.closed
+      dbm002CanonicalFiniteBenchmarkRecordContract := by
+  unfold DBM002FiniteBenchmarkRecordContract.closed
+  unfold dbm002CanonicalFiniteBenchmarkRecordContract
+  simp
+
+/--
 The full Paper 14 theorem stays closed only after a future final conditional
 certificate. `DBM-001` intentionally leaves that field false.
 -/
@@ -200,11 +313,43 @@ def paper14InitialDBM001SkeletonContract :
     noUnifiedFieldTheoryClaim := True
   }
 
+def paper14DBM002SkeletonContract :
+    Paper14DiscriminatingBenchmarksTheoremContract :=
+  {
+    dbm001UpstreamBindingClosed :=
+      DBM001UpstreamBindingContract.closed
+        dbm001CanonicalUpstreamBindingContract,
+    dbm002FiniteBenchmarkRecordClosed :=
+      DBM002FiniteBenchmarkRecordContract.closed
+        dbm002CanonicalFiniteBenchmarkRecordContract,
+    dbm003TargetComparatorRegimeClosed := False,
+    dbm004OutcomeUncertaintyAuditClosed := False,
+    dbm005Paper13IntakeCompatibilityClosed := False,
+    dbm006StabilityCoarseGrainingClosed := False,
+    dbm007NoHiddenPromotionValidationPredictionAuditClosed := False,
+    dbm008FinalConditionalCertificateClosed := False,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
 theorem paper14_dbm001_skeleton_does_not_close_discriminating_benchmarks_theorem :
     ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
       paper14InitialDBM001SkeletonContract := by
   unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
   unfold paper14InitialDBM001SkeletonContract
+  simp
+
+theorem paper14_dbm002_skeleton_does_not_close_discriminating_benchmarks_theorem :
+    ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
+      paper14DBM002SkeletonContract := by
+  unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
+  unfold paper14DBM002SkeletonContract
   simp
 
 end FiniteCapacity
