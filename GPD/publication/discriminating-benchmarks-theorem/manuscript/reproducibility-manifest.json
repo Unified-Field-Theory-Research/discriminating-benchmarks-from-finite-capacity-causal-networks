@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "paper": 14,
+  "checks": [
+    "make test-fast",
+    "make lean-build"
+  ],
+  "formal_module": "FiniteCapacity.DiscriminatingBenchmarks",
+  "rust_test": "rust/cclab_accel/tests/discriminating_benchmarks.rs",
+  "non_promotion_boundary_required": true
+}

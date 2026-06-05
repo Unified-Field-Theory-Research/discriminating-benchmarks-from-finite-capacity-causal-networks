@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "paper": 14,
+  "slug": "discriminating-benchmarks-theorem",
+  "title": "Discriminating Benchmarks From Finite-Capacity Causal Networks",
+  "active_obligation": "DBM-002",
+  "closed_obligations": ["DBM-001"],
+  "status": "open_non_promoting_scaffold"
+}
