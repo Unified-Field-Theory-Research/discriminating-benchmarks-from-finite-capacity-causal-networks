@@ -2,7 +2,7 @@
 
 ## Current Status
 
-Paper 14 is open. `DBM-001` is closed as an upstream-binding and
+Paper 14 is closed conditionally. `DBM-001` is closed as an upstream-binding and
 claim-boundary scaffold through the frozen Paper 13 result:
 
 - Paper 13 commit:
@@ -19,15 +19,16 @@ is closed as a finite outcome, uncertainty, and audit-status descriptor rung.
 rung. `DBM-006` is closed as a benchmark stability and coarse-graining rung.
 `DBM-007` is closed as a no-hidden-promotion, validation, prediction, or
 falsification import audit rung.
-The local Paper 14 discriminating benchmarks theorem is not closed.
+`DBM-008` is closed as the final conditional certificate. The local Paper 14
+discriminating benchmarks theorem is closed as a conditional, non-promoting
+benchmark-interface theorem.
 
 ## Active Obligation
 
-`DBM-008`: Assemble the final conditional discriminating benchmarks
-certificate.
+No active proof obligations remain.
 
-The final certificate must close only the conditional discriminating benchmarks
-interface and must not
+The final certificate closes only the conditional discriminating benchmarks
+interface and does not
 import continuum quantum field theory, external Hilbert bundles, matter fields,
 gauge fields, physical particle excitations, physical Standard Model content,
 physical validation, empirical adequacy, observed-catalog recovery, prediction
@@ -45,12 +46,12 @@ calibration, physical nature realization, or a unified field theory.
 - `DBM-006`: Benchmark stability and coarse-graining behavior.
 - `DBM-007`: No-hidden-promotion, validation, prediction, or falsification
   import audit.
+- `DBM-008`: Final conditional discriminating benchmarks certificate.
 
 ## Claim Boundary
 
-The following claims remain false in this repository:
+The following physical or empirical claims remain false in this repository:
 
-- discriminating benchmarks theorem closed
 - benchmark recovery
 - prediction success
 - falsification success

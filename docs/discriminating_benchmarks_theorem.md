@@ -5,10 +5,10 @@
 Construct a finite, network-native discriminating benchmark interface
 downstream of the closed Paper 13 external physical evidence intake theorem.
 
-The target is a conditional theorem only. It should eventually specify how
-benchmark records can be stated, audited, and compared without silently
-turning benchmark definition into physical validation, prediction success,
-falsification success, or unified-field promotion.
+The result is a conditional theorem only. It specifies how benchmark records
+can be stated, audited, and compared without silently turning benchmark
+definition into physical validation, prediction success, falsification success,
+or unified-field promotion.
 
 ## Closed Rungs
 
@@ -34,12 +34,15 @@ falsification success, or unified-field promotion.
   import audit with fail-closed blockers for simulation-only promotion,
   fit-only calibration, physical nature realization, and unified-field
   promotion.
+- `DBM-008`: Final conditional certificate closing the discriminating
+  benchmarks theorem as a finite, network-native, non-promoting benchmark
+  interface.
 
 ## Active Rung
 
-- `DBM-008`: Final conditional certificate.
+No active rungs remain.
 
-Required boundary for `DBM-008`:
+Final boundary preserved by `DBM-008`:
 
 - all prior DBM rungs closed
 - final certificate remains conditional
@@ -58,7 +61,7 @@ Required boundary for `DBM-008`:
 
 ## Planned Rungs
 
-No planned rungs remain before final closure.
+No planned rungs remain.
 
 ## Residual Risk
 

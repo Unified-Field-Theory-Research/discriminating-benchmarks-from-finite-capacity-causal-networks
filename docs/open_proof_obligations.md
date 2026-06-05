@@ -2,24 +2,7 @@
 
 ## Active
 
-### DBM-008
-
-Assemble the final conditional discriminating benchmarks certificate.
-
-Acceptance criteria:
-
-- all DBM-001 through DBM-007 contracts are closed
-- the Paper 14 theorem contract closes conditionally
-- final closure does not assert benchmark recovery, prediction success,
-  falsification success, physical validation, empirical adequacy, physical
-  nature realization, or unified-field promotion
-- Rust guards show the final certificate closes only with all non-promotion
-  gates true
-- Rust guards reject benchmark recovery, prediction success, falsification
-  success, physical validation, empirical adequacy, observed-catalog recovery,
-  simulation-only promotion, fit-only calibration, physical nature
-  realization, and unified-field promotion
-- Lean scaffold proves the final Paper 14 theorem contract closes
+No active proof obligations remain.
 
 ## Closed
 
@@ -32,3 +15,4 @@ Acceptance criteria:
 - `DBM-006`: Benchmark stability and coarse-graining behavior.
 - `DBM-007`: No-hidden-promotion, validation, prediction, or falsification
   import audit.
+- `DBM-008`: Final conditional discriminating benchmarks certificate.

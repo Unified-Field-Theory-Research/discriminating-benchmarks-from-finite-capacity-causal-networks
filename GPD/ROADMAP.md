@@ -13,15 +13,15 @@
 - `DBM-006`: Benchmark stability and coarse-graining behavior.
 - `DBM-007`: No-hidden-promotion, validation, prediction, or falsification
   import audit.
+- `DBM-008`: Final conditional discriminating benchmarks certificate.
 
 ## Active
 
-- `DBM-008`: Assemble the final conditional discriminating benchmarks
-  certificate.
+No active proof obligations remain.
 
 ## Planned
 
-No planned rungs remain before final closure.
+No planned rungs remain.
 
 All planned rungs remain conditional and non-promoting unless explicitly
 closed by formal and Rust guards.

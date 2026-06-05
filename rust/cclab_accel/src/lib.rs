@@ -831,6 +831,52 @@ impl DBM007NoHiddenImportAudit {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct DBM008FinalConditionalCertificate {
+    pub no_hidden_import_audit: DBM007NoHiddenImportAudit,
+    pub final_conditional_certificate_closed: bool,
+    pub conditional_interface_theorem_only: bool,
+    pub no_benchmark_pass_claim: bool,
+    pub no_external_evidence_promotion: bool,
+    pub no_physical_validation_claim: bool,
+    pub no_empirical_adequacy_claim: bool,
+    pub no_physical_nature_claim: bool,
+    pub no_unified_field_theory_claim: bool,
+    pub claim_boundary: Paper14ClaimBoundary,
+}
+
+impl DBM008FinalConditionalCertificate {
+    pub const fn canonical() -> Self {
+        Self {
+            no_hidden_import_audit: DBM007NoHiddenImportAudit::canonical(),
+            final_conditional_certificate_closed: true,
+            conditional_interface_theorem_only: true,
+            no_benchmark_pass_claim: true,
+            no_external_evidence_promotion: true,
+            no_physical_validation_claim: true,
+            no_empirical_adequacy_claim: true,
+            no_physical_nature_claim: true,
+            no_unified_field_theory_claim: true,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_dbm008(&self) -> bool {
+        self.no_hidden_import_audit.closes_dbm007()
+            && self.final_conditional_certificate_closed
+            && self.conditional_interface_theorem_only
+            && self.no_benchmark_pass_claim
+            && self.no_external_evidence_promotion
+            && self.no_physical_validation_claim
+            && self.no_empirical_adequacy_claim
+            && self.no_physical_nature_claim
+            && self.no_unified_field_theory_claim
+            && self
+                .claim_boundary
+                .all_physical_and_benchmark_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper14SkeletonCertificate {
     pub dbm001_upstream_binding_closed: bool,
     pub dbm002_finite_benchmark_record_closed: bool,
@@ -942,6 +988,20 @@ impl Paper14SkeletonCertificate {
         }
     }
 
+    pub const fn final_conditional() -> Self {
+        Self {
+            dbm001_upstream_binding_closed: true,
+            dbm002_finite_benchmark_record_closed: true,
+            dbm003_target_comparator_regime_closed: true,
+            dbm004_outcome_uncertainty_audit_closed: true,
+            dbm005_paper13_intake_compatibility_closed: true,
+            dbm006_stability_coarse_graining_closed: true,
+            dbm007_no_hidden_promotion_validation_prediction_audit_closed: true,
+            dbm008_final_conditional_certificate_closed: true,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper14_theorem(&self) -> bool {
         self.dbm001_upstream_binding_closed
             && self.dbm002_finite_benchmark_record_closed
@@ -966,5 +1026,5 @@ pub fn is_sha1_hex(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "DBM-008"
+    "CLOSED"
 }

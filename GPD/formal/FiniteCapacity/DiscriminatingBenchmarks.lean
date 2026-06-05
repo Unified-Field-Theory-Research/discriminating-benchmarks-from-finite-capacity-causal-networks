@@ -810,6 +810,75 @@ theorem dbm007_canonical_no_hidden_import_audit_closed :
   simp
 
 /--
+`DBM-008` is the final conditional certificate. It closes the Paper 14
+discriminating benchmarks theorem only as a finite benchmark-interface theorem;
+it does not close physical validation, empirical adequacy, benchmark recovery,
+prediction success, falsification success, physical nature, or unified-field
+promotion.
+-/
+structure DBM008FinalConditionalCertificateContract where
+  dbm007NoHiddenImportAuditClosed : Prop
+  finalConditionalCertificateClosed : Prop
+  conditionalInterfaceTheoremOnly : Prop
+  noBenchmarkPassClaim : Prop
+  noExternalEvidencePromotion : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def DBM008FinalConditionalCertificateContract.closed
+    (c : DBM008FinalConditionalCertificateContract) : Prop :=
+  c.dbm007NoHiddenImportAuditClosed ∧
+  c.finalConditionalCertificateClosed ∧
+  c.conditionalInterfaceTheoremOnly ∧
+  c.noBenchmarkPassClaim ∧
+  c.noExternalEvidencePromotion ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+theorem dbm008_final_conditional_certificate_closed_from_fields
+    (c : DBM008FinalConditionalCertificateContract)
+    (hDBM007 : c.dbm007NoHiddenImportAuditClosed)
+    (hFinal : c.finalConditionalCertificateClosed)
+    (hInterfaceOnly : c.conditionalInterfaceTheoremOnly)
+    (hNoPass : c.noBenchmarkPassClaim)
+    (hNoEvidencePromotion : c.noExternalEvidencePromotion)
+    (hNoValidation : c.noPhysicalValidationClaim)
+    (hNoEmpirical : c.noEmpiricalAdequacyClaim)
+    (hNoNature : c.noPhysicalNatureClaim)
+    (hNoUFT : c.noUnifiedFieldTheoryClaim) :
+    DBM008FinalConditionalCertificateContract.closed c := by
+  unfold DBM008FinalConditionalCertificateContract.closed
+  exact ⟨hDBM007, hFinal, hInterfaceOnly, hNoPass, hNoEvidencePromotion,
+    hNoValidation, hNoEmpirical, hNoNature, hNoUFT⟩
+
+def dbm008CanonicalFinalConditionalCertificateContract :
+    DBM008FinalConditionalCertificateContract :=
+  {
+    dbm007NoHiddenImportAuditClosed :=
+      DBM007NoHiddenPromotionValidationPredictionAuditContract.closed
+        dbm007CanonicalNoHiddenPromotionValidationPredictionAuditContract,
+    finalConditionalCertificateClosed := True,
+    conditionalInterfaceTheoremOnly := True,
+    noBenchmarkPassClaim := True,
+    noExternalEvidencePromotion := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem dbm008_canonical_final_conditional_certificate_closed :
+    DBM008FinalConditionalCertificateContract.closed
+      dbm008CanonicalFinalConditionalCertificateContract := by
+  unfold DBM008FinalConditionalCertificateContract.closed
+  unfold dbm008CanonicalFinalConditionalCertificateContract
+  simp
+
+/--
 The full Paper 14 theorem stays closed only after a future final conditional
 certificate. `DBM-001` intentionally leaves that field false.
 -/
@@ -1053,6 +1122,43 @@ def paper14DBM007SkeletonContract :
     noUnifiedFieldTheoryClaim := True
   }
 
+def paper14FinalConditionalCertificateContract :
+    Paper14DiscriminatingBenchmarksTheoremContract :=
+  {
+    dbm001UpstreamBindingClosed :=
+      DBM001UpstreamBindingContract.closed
+        dbm001CanonicalUpstreamBindingContract,
+    dbm002FiniteBenchmarkRecordClosed :=
+      DBM002FiniteBenchmarkRecordContract.closed
+        dbm002CanonicalFiniteBenchmarkRecordContract,
+    dbm003TargetComparatorRegimeClosed :=
+      DBM003TargetComparatorRegimeDescriptorContract.closed
+        dbm003CanonicalTargetComparatorRegimeDescriptorContract,
+    dbm004OutcomeUncertaintyAuditClosed :=
+      DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+        dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract,
+    dbm005Paper13IntakeCompatibilityClosed :=
+      DBM005Paper13IntakeCompatibilityContract.closed
+        dbm005CanonicalPaper13IntakeCompatibilityContract,
+    dbm006StabilityCoarseGrainingClosed :=
+      DBM006StabilityCoarseGrainingContract.closed
+        dbm006CanonicalStabilityCoarseGrainingContract,
+    dbm007NoHiddenPromotionValidationPredictionAuditClosed :=
+      DBM007NoHiddenPromotionValidationPredictionAuditContract.closed
+        dbm007CanonicalNoHiddenPromotionValidationPredictionAuditContract,
+    dbm008FinalConditionalCertificateClosed :=
+      DBM008FinalConditionalCertificateContract.closed
+        dbm008CanonicalFinalConditionalCertificateContract,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
 theorem paper14_dbm001_skeleton_does_not_close_discriminating_benchmarks_theorem :
     ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
       paper14InitialDBM001SkeletonContract := by
@@ -1100,6 +1206,13 @@ theorem paper14_dbm007_skeleton_does_not_close_discriminating_benchmarks_theorem
       paper14DBM007SkeletonContract := by
   unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
   unfold paper14DBM007SkeletonContract
+  simp
+
+theorem paper14_dbm008_final_conditional_certificate_closes_discriminating_benchmarks_theorem :
+    Paper14DiscriminatingBenchmarksTheoremContract.closed
+      paper14FinalConditionalCertificateContract := by
+  unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
+  unfold paper14FinalConditionalCertificateContract
   simp
 
 end FiniteCapacity

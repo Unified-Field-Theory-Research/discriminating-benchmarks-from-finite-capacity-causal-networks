@@ -40,3 +40,8 @@
   a Lean contract proving the DBM-007 rung while keeping the full Paper 14
   theorem open.
 - Recorded `DBM-008` as the active final certificate obligation.
+- Closed `DBM-008` with a final conditional certificate, Rust guards showing
+  the Paper 14 theorem contract closes only with all non-promotion gates true,
+  and a Lean theorem:
+  `paper14_dbm008_final_conditional_certificate_closes_discriminating_benchmarks_theorem`.
+- Recorded that no active proof obligations remain.

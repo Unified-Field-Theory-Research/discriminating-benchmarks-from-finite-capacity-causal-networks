@@ -7,15 +7,15 @@ The repository begins with `DBM-001` closed: upstream binding and
 claim-boundary preservation through the frozen Paper 13 external physical
 evidence intake certificate.
 
-The local theorem is not closed. `DBM-002` defines finite discriminating
-benchmark records as bounded, auditable, non-promoting interface rows.
+The local theorem is closed as a conditional, non-promoting benchmark-interface
+theorem. `DBM-002` defines finite discriminating benchmark records as bounded,
+auditable, non-promoting interface rows.
 `DBM-003` defines finite benchmark target, comparator, and regime descriptors.
 `DBM-004` defines finite benchmark outcome, uncertainty, and audit-status
 descriptors. `DBM-005` defines Paper 13 evidence-intake compatibility without
 validation. `DBM-006` defines benchmark stability and coarse-graining behavior.
 `DBM-007` audits for hidden promotion, validation, prediction, or falsification
-imports. The active next obligation is `DBM-008`: assemble the final
-conditional certificate.
+imports. `DBM-008` assembles the final conditional certificate.
 
 ## Claim Boundary
 

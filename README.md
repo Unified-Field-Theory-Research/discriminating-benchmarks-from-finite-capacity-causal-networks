@@ -36,16 +36,17 @@ This repo is intentionally separate from the upstream theorem repositories:
 - Paper 13 external physical evidence intake repo: `https://github.com/Unified-Field-Theory-Research/external-physical-evidence-intake-from-finite-capacity-causal-networks`
 - Upstream binding file: `UPSTREAM-PAPERS.json`
 
-The current theorem package is open and non-promoting. `DBM-001` records the
-upstream binding and claim boundary through the closed Paper 13 result.
+The current theorem package is closed as a conditional, non-promoting
+benchmark-interface theorem. `DBM-001` records the upstream binding and claim
+boundary through the closed Paper 13 result.
 `DBM-002` defines finite discriminating benchmark records as bounded,
 auditable, non-promoting interface rows. `DBM-003` defines finite benchmark
 target, comparator, and regime descriptors. `DBM-004` defines finite benchmark
 outcome, uncertainty, and audit-status descriptors. `DBM-005` defines Paper 13
 evidence-intake compatibility without validation. `DBM-006` defines benchmark
 stability and coarse-graining behavior. `DBM-007` audits for hidden promotion,
-validation, prediction, or falsification imports. `DBM-008` is the active next
-obligation: assemble the final conditional certificate.
+validation, prediction, or falsification imports. `DBM-008` assembles the
+final conditional certificate.
 
 This does not prove benchmark recovery, prediction success, falsification
 success, physical promotion, physical validation, empirical adequacy, observed
