@@ -40,9 +40,10 @@ The current theorem package is open and non-promoting. `DBM-001` records the
 upstream binding and claim boundary through the closed Paper 13 result.
 `DBM-002` defines finite discriminating benchmark records as bounded,
 auditable, non-promoting interface rows. `DBM-003` defines finite benchmark
-target, comparator, and regime descriptors. `DBM-004` is the active next
-obligation: define finite benchmark outcome, uncertainty, and audit-status
-descriptors.
+target, comparator, and regime descriptors. `DBM-004` defines finite benchmark
+outcome, uncertainty, and audit-status descriptors. `DBM-005` is the active
+next obligation: define Paper 13 evidence-intake compatibility without
+validation.
 
 This does not prove benchmark recovery, prediction success, falsification
 success, physical promotion, physical validation, empirical adequacy, observed

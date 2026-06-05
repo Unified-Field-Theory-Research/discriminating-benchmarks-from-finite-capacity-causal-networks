@@ -7,18 +7,17 @@
 - `DBM-002`: Finite discriminating benchmark records as bounded, auditable,
   non-promoting interface rows.
 - `DBM-003`: Finite benchmark target, comparator, and regime descriptors.
+- `DBM-004`: Finite benchmark outcome, uncertainty, and audit-status
+  descriptors.
 
 ## Active
 
-- `DBM-004`: Define finite benchmark outcome, uncertainty, and audit-status
-  descriptors without importing physical promotion, physical validation,
-  empirical adequacy, observed-catalog recovery, prediction success,
-  falsification closure, simulation-only promotion, or fit-only calibration.
+- `DBM-005`: Define Paper 13 evidence-intake compatibility without closing
+  validation, empirical adequacy, prediction success, falsification closure,
+  physical promotion, or observed-catalog recovery.
 
 ## Planned
 
-- `DBM-005`: Define compatibility with Paper 13 evidence-intake rows without
-  closing validation.
 - `DBM-006`: Define benchmark stability and coarse-graining behavior.
 - `DBM-007`: Audit for hidden physical-promotion, validation, prediction, or
   falsification imports.

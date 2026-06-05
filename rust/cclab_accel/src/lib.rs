@@ -482,6 +482,100 @@ impl DBM003TargetComparatorRegimeDescriptors {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum OutcomeDescriptorKind {
+    BoundedLedgerObservation,
+    FiniteComparisonDelta,
+    ReferenceOnlyCompatibilityObservation,
+}
+
+impl OutcomeDescriptorKind {
+    pub const ALL: [Self; 3] = [
+        Self::BoundedLedgerObservation,
+        Self::FiniteComparisonDelta,
+        Self::ReferenceOnlyCompatibilityObservation,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum UncertaintyDescriptorKind {
+    FiniteToleranceBand,
+    BoundedIntervalTag,
+    AuditDeferredBound,
+}
+
+impl UncertaintyDescriptorKind {
+    pub const ALL: [Self; 3] = [
+        Self::FiniteToleranceBand,
+        Self::BoundedIntervalTag,
+        Self::AuditDeferredBound,
+    ];
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct DBM004OutcomeUncertaintyAuditDescriptors {
+    pub descriptor_set: DBM003TargetComparatorRegimeDescriptors,
+    pub outcome_descriptor: OutcomeDescriptorKind,
+    pub uncertainty_descriptor: UncertaintyDescriptorKind,
+    pub audit_status_descriptor: AuditStatusDescriptor,
+    pub outcome_descriptor_is_finite: bool,
+    pub uncertainty_descriptor_is_finite: bool,
+    pub audit_status_descriptor_is_finite: bool,
+    pub bounded_outcome_schema: bool,
+    pub uncertainty_provenance_audit_visible: bool,
+    pub outcome_is_not_benchmark_recovery: bool,
+    pub outcome_is_not_prediction_success: bool,
+    pub outcome_is_not_falsification_success: bool,
+    pub audit_status_blocks_physical_promotion: bool,
+    pub paper13_compatibility_referenced_only: bool,
+    pub claim_boundary: Paper14ClaimBoundary,
+}
+
+impl DBM004OutcomeUncertaintyAuditDescriptors {
+    pub const fn canonical() -> Self {
+        Self {
+            descriptor_set: DBM003TargetComparatorRegimeDescriptors::canonical(),
+            outcome_descriptor: OutcomeDescriptorKind::BoundedLedgerObservation,
+            uncertainty_descriptor: UncertaintyDescriptorKind::FiniteToleranceBand,
+            audit_status_descriptor: AuditStatusDescriptor::PassedNonPromotionAudit,
+            outcome_descriptor_is_finite: true,
+            uncertainty_descriptor_is_finite: true,
+            audit_status_descriptor_is_finite: true,
+            bounded_outcome_schema: true,
+            uncertainty_provenance_audit_visible: true,
+            outcome_is_not_benchmark_recovery: true,
+            outcome_is_not_prediction_success: true,
+            outcome_is_not_falsification_success: true,
+            audit_status_blocks_physical_promotion: true,
+            paper13_compatibility_referenced_only: true,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_dbm004(&self) -> bool {
+        self.descriptor_set.closes_dbm003()
+            && !OutcomeDescriptorKind::ALL.is_empty()
+            && !UncertaintyDescriptorKind::ALL.is_empty()
+            && !AuditStatusDescriptor::ALL.is_empty()
+            && OutcomeDescriptorKind::ALL.contains(&self.outcome_descriptor)
+            && UncertaintyDescriptorKind::ALL.contains(&self.uncertainty_descriptor)
+            && AuditStatusDescriptor::ALL.contains(&self.audit_status_descriptor)
+            && self.outcome_descriptor_is_finite
+            && self.uncertainty_descriptor_is_finite
+            && self.audit_status_descriptor_is_finite
+            && self.bounded_outcome_schema
+            && self.uncertainty_provenance_audit_visible
+            && self.outcome_is_not_benchmark_recovery
+            && self.outcome_is_not_prediction_success
+            && self.outcome_is_not_falsification_success
+            && self.audit_status_blocks_physical_promotion
+            && self.paper13_compatibility_referenced_only
+            && self
+                .claim_boundary
+                .all_physical_and_benchmark_claims_remain_false()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper14SkeletonCertificate {
     pub dbm001_upstream_binding_closed: bool,
     pub dbm002_finite_benchmark_record_closed: bool,
@@ -537,6 +631,20 @@ impl Paper14SkeletonCertificate {
         }
     }
 
+    pub const fn through_dbm004() -> Self {
+        Self {
+            dbm001_upstream_binding_closed: true,
+            dbm002_finite_benchmark_record_closed: true,
+            dbm003_target_comparator_regime_closed: true,
+            dbm004_outcome_uncertainty_audit_closed: true,
+            dbm005_paper13_intake_compatibility_closed: false,
+            dbm006_stability_coarse_graining_closed: false,
+            dbm007_no_hidden_promotion_validation_prediction_audit_closed: false,
+            dbm008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper14ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper14_theorem(&self) -> bool {
         self.dbm001_upstream_binding_closed
             && self.dbm002_finite_benchmark_record_closed
@@ -561,5 +669,5 @@ pub fn is_sha1_hex(value: &str) -> bool {
 }
 
 pub fn active_obligation() -> &'static str {
-    "DBM-004"
+    "DBM-005"
 }

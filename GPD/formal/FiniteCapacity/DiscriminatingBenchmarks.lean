@@ -356,6 +356,129 @@ theorem dbm003_canonical_target_comparator_regime_closed :
   simp
 
 /--
+`DBM-004` adds outcome, uncertainty, and audit-status descriptors. Outcome
+rows remain finite audit descriptors only; they do not assert recovery,
+prediction success, falsification success, validation, or promotion.
+-/
+structure DBM004OutcomeUncertaintyAuditDescriptorContract where
+  dbm003TargetComparatorRegimeClosed : Prop
+  finiteOutcomeDescriptors : Prop
+  finiteUncertaintyDescriptors : Prop
+  finiteAuditStatusDescriptors : Prop
+  boundedOutcomeSchema : Prop
+  uncertaintyProvenanceAuditVisible : Prop
+  outcomeNotBenchmarkRecovery : Prop
+  outcomeNotPredictionSuccess : Prop
+  outcomeNotFalsificationSuccess : Prop
+  auditStatusBlocksPhysicalPromotion : Prop
+  paper13CompatibilityReferencedOnly : Prop
+  noBenchmarkRecoveryClaim : Prop
+  noPredictionSuccessClaim : Prop
+  noFalsificationSuccessClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+  noObservedCatalogRecoveryClaim : Prop
+  noSimulationOnlyPromotion : Prop
+  noFitOnlyCalibrationClaim : Prop
+  noPhysicalNatureClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+
+def DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+    (c : DBM004OutcomeUncertaintyAuditDescriptorContract) : Prop :=
+  c.dbm003TargetComparatorRegimeClosed ∧
+  c.finiteOutcomeDescriptors ∧
+  c.finiteUncertaintyDescriptors ∧
+  c.finiteAuditStatusDescriptors ∧
+  c.boundedOutcomeSchema ∧
+  c.uncertaintyProvenanceAuditVisible ∧
+  c.outcomeNotBenchmarkRecovery ∧
+  c.outcomeNotPredictionSuccess ∧
+  c.outcomeNotFalsificationSuccess ∧
+  c.auditStatusBlocksPhysicalPromotion ∧
+  c.paper13CompatibilityReferencedOnly ∧
+  c.noBenchmarkRecoveryClaim ∧
+  c.noPredictionSuccessClaim ∧
+  c.noFalsificationSuccessClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim ∧
+  c.noObservedCatalogRecoveryClaim ∧
+  c.noSimulationOnlyPromotion ∧
+  c.noFitOnlyCalibrationClaim ∧
+  c.noPhysicalNatureClaim ∧
+  c.noUnifiedFieldTheoryClaim
+
+theorem dbm004_outcome_uncertainty_audit_closed_from_fields
+    (c : DBM004OutcomeUncertaintyAuditDescriptorContract)
+    (hDBM003 : c.dbm003TargetComparatorRegimeClosed)
+    (hOutcome : c.finiteOutcomeDescriptors)
+    (hUncertainty : c.finiteUncertaintyDescriptors)
+    (hAuditStatus : c.finiteAuditStatusDescriptors)
+    (hBounded : c.boundedOutcomeSchema)
+    (hUncertaintyAudit : c.uncertaintyProvenanceAuditVisible)
+    (hNoOutcomeRecovery : c.outcomeNotBenchmarkRecovery)
+    (hNoOutcomePrediction : c.outcomeNotPredictionSuccess)
+    (hNoOutcomeFalsification : c.outcomeNotFalsificationSuccess)
+    (hAuditBlocksPromotion : c.auditStatusBlocksPhysicalPromotion)
+    (hPaper13Reference : c.paper13CompatibilityReferencedOnly)
+    (hNoBenchmarkRecovery : c.noBenchmarkRecoveryClaim)
+    (hNoPrediction : c.noPredictionSuccessClaim)
+    (hNoFalsification : c.noFalsificationSuccessClaim)
+    (hNoPromotion : c.noPhysicalPromotionClaim)
+    (hNoValidation : c.noPhysicalValidationClaim)
+    (hNoEmpirical : c.noEmpiricalAdequacyClaim)
+    (hNoObserved : c.noObservedCatalogRecoveryClaim)
+    (hNoSimulation : c.noSimulationOnlyPromotion)
+    (hNoFit : c.noFitOnlyCalibrationClaim)
+    (hNoNature : c.noPhysicalNatureClaim)
+    (hNoUFT : c.noUnifiedFieldTheoryClaim) :
+    DBM004OutcomeUncertaintyAuditDescriptorContract.closed c := by
+  unfold DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+  exact ⟨hDBM003, hOutcome, hUncertainty, hAuditStatus, hBounded,
+    hUncertaintyAudit, hNoOutcomeRecovery, hNoOutcomePrediction,
+    hNoOutcomeFalsification, hAuditBlocksPromotion, hPaper13Reference,
+    hNoBenchmarkRecovery, hNoPrediction, hNoFalsification, hNoPromotion,
+    hNoValidation, hNoEmpirical, hNoObserved, hNoSimulation, hNoFit,
+    hNoNature, hNoUFT⟩
+
+def dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract :
+    DBM004OutcomeUncertaintyAuditDescriptorContract :=
+  {
+    dbm003TargetComparatorRegimeClosed :=
+      DBM003TargetComparatorRegimeDescriptorContract.closed
+        dbm003CanonicalTargetComparatorRegimeDescriptorContract,
+    finiteOutcomeDescriptors := True,
+    finiteUncertaintyDescriptors := True,
+    finiteAuditStatusDescriptors := True,
+    boundedOutcomeSchema := True,
+    uncertaintyProvenanceAuditVisible := True,
+    outcomeNotBenchmarkRecovery := True,
+    outcomeNotPredictionSuccess := True,
+    outcomeNotFalsificationSuccess := True,
+    auditStatusBlocksPhysicalPromotion := True,
+    paper13CompatibilityReferencedOnly := True,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noObservedCatalogRecoveryClaim := True,
+    noSimulationOnlyPromotion := True,
+    noFitOnlyCalibrationClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
+theorem dbm004_canonical_outcome_uncertainty_audit_closed :
+    DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+      dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract := by
+  unfold DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+  unfold dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract
+  simp
+
+/--
 The full Paper 14 theorem stays closed only after a future final conditional
 certificate. `DBM-001` intentionally leaves that field false.
 -/
@@ -471,6 +594,35 @@ def paper14DBM003SkeletonContract :
     noUnifiedFieldTheoryClaim := True
   }
 
+def paper14DBM004SkeletonContract :
+    Paper14DiscriminatingBenchmarksTheoremContract :=
+  {
+    dbm001UpstreamBindingClosed :=
+      DBM001UpstreamBindingContract.closed
+        dbm001CanonicalUpstreamBindingContract,
+    dbm002FiniteBenchmarkRecordClosed :=
+      DBM002FiniteBenchmarkRecordContract.closed
+        dbm002CanonicalFiniteBenchmarkRecordContract,
+    dbm003TargetComparatorRegimeClosed :=
+      DBM003TargetComparatorRegimeDescriptorContract.closed
+        dbm003CanonicalTargetComparatorRegimeDescriptorContract,
+    dbm004OutcomeUncertaintyAuditClosed :=
+      DBM004OutcomeUncertaintyAuditDescriptorContract.closed
+        dbm004CanonicalOutcomeUncertaintyAuditDescriptorContract,
+    dbm005Paper13IntakeCompatibilityClosed := False,
+    dbm006StabilityCoarseGrainingClosed := False,
+    dbm007NoHiddenPromotionValidationPredictionAuditClosed := False,
+    dbm008FinalConditionalCertificateClosed := False,
+    noBenchmarkRecoveryClaim := True,
+    noPredictionSuccessClaim := True,
+    noFalsificationSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True,
+    noPhysicalNatureClaim := True,
+    noUnifiedFieldTheoryClaim := True
+  }
+
 theorem paper14_dbm001_skeleton_does_not_close_discriminating_benchmarks_theorem :
     ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
       paper14InitialDBM001SkeletonContract := by
@@ -490,6 +642,13 @@ theorem paper14_dbm003_skeleton_does_not_close_discriminating_benchmarks_theorem
       paper14DBM003SkeletonContract := by
   unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
   unfold paper14DBM003SkeletonContract
+  simp
+
+theorem paper14_dbm004_skeleton_does_not_close_discriminating_benchmarks_theorem :
+    ¬ Paper14DiscriminatingBenchmarksTheoremContract.closed
+      paper14DBM004SkeletonContract := by
+  unfold Paper14DiscriminatingBenchmarksTheoremContract.closed
+  unfold paper14DBM004SkeletonContract
   simp
 
 end FiniteCapacity

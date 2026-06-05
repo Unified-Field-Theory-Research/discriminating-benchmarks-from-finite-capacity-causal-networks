@@ -10,8 +10,9 @@ evidence intake certificate.
 The local theorem is not closed. `DBM-002` defines finite discriminating
 benchmark records as bounded, auditable, non-promoting interface rows.
 `DBM-003` defines finite benchmark target, comparator, and regime descriptors.
-The active next obligation is `DBM-004`: define finite benchmark outcome,
-uncertainty, and audit-status descriptors.
+`DBM-004` defines finite benchmark outcome, uncertainty, and audit-status
+descriptors. The active next obligation is `DBM-005`: define Paper 13
+evidence-intake compatibility without validation.
 
 ## Claim Boundary
 

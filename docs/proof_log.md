@@ -19,3 +19,8 @@
   Lean contract proving the DBM-003 rung while keeping the full Paper 14
   theorem open.
 - Recorded `DBM-004` as the active next obligation.
+- Closed `DBM-004` with finite outcome and uncertainty descriptor enums,
+  finite audit-status descriptors, outcome-not-recovery/prediction/falsification
+  guards, and a Lean contract proving the DBM-004 rung while keeping the full
+  Paper 14 theorem open.
+- Recorded `DBM-005` as the active next obligation.
